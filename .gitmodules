@@ -1,15 +1,6 @@
-[submodule "web/4-course-crossplatform"]
-	path = web/4-course-crossplatform
-	url = https://github.com/aodewanai/4-course-crossplatform
-[submodule "1.java+CPP/CrossplatformDeveloping"]
-	path = 1.java+CPP/CrossplatformDeveloping
-	url = https://github.com/MatviySuk/CrossplatformDeveloping/
 [submodule "3.csharp/crossplatform-programming"]
 	path = 3.csharp/crossplatform-programming
 	url = https://github.com/sbohatko/crossplatform-programming
-[submodule "3.crossmobile/crossplatform-mobile"]
-	path = 3.crossmobile/crossplatform-mobile
-	url = https://github.com/Sam-Razavi/crossplatform-mobile
 [submodule "3.flutter/Iamrich-CrossPlatform"]
 	path = 3.flutter/Iamrich-CrossPlatform
 	url = https://github.com/TQH203/Iamrich-CrossPlatform
@@ -31,3 +22,15 @@
 [submodule "3.React/React-Native-Playground"]
 	path = 3.React/React-Native-Playground
 	url = https://github.com/MrCrabz/React-Native-Playground
+[submodule "1.java/CrossplatformDeveloping"]
+	path = 1.java/CrossplatformDeveloping
+	url = https://github.com/MatviySuk/CrossplatformDeveloping/
+[submodule "2.electron/4-course-crossplatform"]
+	path = 2.electron/4-course-crossplatform
+	url = https://github.com/aodewanai/4-course-crossplatform
+[submodule "1.csharp/crossplatform-programming"]
+	path = 1.csharp/crossplatform-programming
+	url = https://github.com/sbohatko/crossplatform-programming
+[submodule "3.React/crossplatform-mobile"]
+	path = 3.React/crossplatform-mobile
+	url = https://github.com/Sam-Razavi/crossplatform-mobile
