@@ -1,0 +1,16 @@
+0 Bangus
+1 Catfish
+2 Climbing Perch
+3 Fourfinger Threadfin
+4 Freshwater Eel
+5 Gourami
+6 Grass Carp
+7 Indian Carp
+8 Indo-Pacific Tarpon
+9 Mullet
+10 Pangasius
+11 Perch
+12 Silver Carp
+13 Silver Perch
+14 Tenpounder
+15 Tilapia
