@@ -1,6 +1,3 @@
-[submodule "3.flutter/Iamrich-CrossPlatform"]
-	path = 3.flutter/Iamrich-CrossPlatform
-	url = https://github.com/TQH203/Iamrich-CrossPlatform
 [submodule "1.CPP/CrossPlatform_Programming_Course"]
 	path = 1.CPP/CrossPlatform_Programming_Course
 	url = https://github.com/Kenobichek/CrossPlatform_Programming_Course
@@ -31,3 +28,6 @@
 [submodule "3.React/crossplatform-mobile"]
 	path = 3.React/crossplatform-mobile
 	url = https://github.com/Sam-Razavi/crossplatform-mobile
+[submodule "3.flutter/Computer-vision-mobile-app"]
+	path = 3.flutter/Computer-vision-mobile-app
+	url = https://github.com/lyon-zas/Computer-vision-mobile-app
