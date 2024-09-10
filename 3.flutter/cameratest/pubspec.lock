@@ -29,10 +29,10 @@ packages:
     dependency: "direct main"
     description:
       name: camera
-      sha256: "7e832a9cfd046a81605b9b671379c45193d4de5eb864a5196f2642e2471106e3"
+      sha256: "3ad71371b8168a4c8012c0b40a53c05afc75d46cc688b0f37b4611a841d47b25"
       url: "https://pub.dev"
     source: hosted
-    version: "0.9.7+1"
+    version: "0.9.8+1"
   camera_android:
     dependency: "direct overridden"
     description:
