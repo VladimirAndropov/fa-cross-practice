@@ -123,6 +123,7 @@ install(
 
     libtensorflowlite_c-linux.so
 
+## Самостоятельная
 
-Дальше читаем здесь
-<!-- https://www.kodeco.com/37077010-tensorflow-lite-tutorial-for-flutter-image-classification -->
+Дальше читаем здесь и выполняем 4 страницы
+https://www.kodeco.com/37077010-tensorflow-lite-tutorial-for-flutter-image-classification
