@@ -36,8 +36,8 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   camera: 0.9.7+1
-  tflite_flutter: ^0.9.0
-  tflite_flutter_helper: ^0.3.1
+  # tflite_flutter: ^0.9.0
+  # tflite_flutter_helper: ^0.3.1
 
 
 dev_dependencies:
@@ -58,8 +58,8 @@ dependency_overrides:
   camera_avfoundation: 0.9.7+1
 # The following section is specific to Flutter packages.
 
-assets:
-  - assets/
+# assets:
+#   - assets/
 
 flutter:
 
