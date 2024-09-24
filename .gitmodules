@@ -31,3 +31,6 @@
 [submodule "3.flutter/Computer-vision-mobile-app"]
 	path = 3.flutter/Computer-vision-mobile-app
 	url = https://github.com/lyon-zas/Computer-vision-mobile-app
+[submodule "flutter-tflite"]
+	path = flutter-tflite
+	url = https://github.com/tensorflow/flutter-tflite
