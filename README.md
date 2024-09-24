@@ -1,3 +1,6 @@
+![image](https://github.com/user-attachments/assets/b83615d4-8cc9-45c8-9a05-d52fec349375)
+
+![result](https://github.com/user-attachments/assets/cdfc3d6f-b9a5-483d-a172-8ed800e9000a)
 
 Фреймворки и библиотеки для кроссплатформенной разработки
 =============================================================================
