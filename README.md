@@ -1,5 +1,4 @@
 
-![image](https://github.com/user-attachments/assets/2a2f95f0-7980-4a20-ab99-7eb1f7923554)
 
 
 Фреймворки и библиотеки для кроссплатформенной разработки
