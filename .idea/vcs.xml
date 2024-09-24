@@ -2,5 +2,17 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/1.CPP/CrossPlatform_Programming_Course" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/1.csharp/CrossPlatformProgramming" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/1.csharp/crossplatform-programming" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/1.java/CrossPlatformProgCourse" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/1.java/CrossplatformDeveloping" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/2.Swift/courses-app" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/2.Vue/TDS200_h22_exam" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/2.electron/4-course-crossplatform" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/3.React/React-Native-Playground" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/3.React/crossplatform-mobile" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/3.flutter/Computer-vision-mobile-app" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/flutter-tflite" vcs="Git" />
   </component>
 </project>
