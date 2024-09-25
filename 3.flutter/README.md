@@ -115,6 +115,20 @@ install(
 
 ## Ура! Мы запускаем примеры 
 
+Если в папке 3.flutter
+
+ видим ссылку flutter-tflite, то выполняем 
+
+
+```
+git submodule update --init --recursive 3.flutter/flutter-tflite
+```
+
+Если ссылки нет, то
+
+```
+git submodule add https://github.com/tensorflow/flutter-tflite
+```
 
 
 Заходим в 3.flutter/flutter-tflite-main/example/image_classification_mobilenet
