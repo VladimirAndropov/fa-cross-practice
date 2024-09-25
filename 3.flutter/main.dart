@@ -59,16 +59,20 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-
+  bool isPressed = false;
   void _incrementCounter() {
+    
     setState(() {
+      isPressed = true;
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
       _counter++;
+      
     });
+     
   }
 
   @override
@@ -121,14 +125,20 @@ class _MyHomePageState extends State<MyHomePage> {
               style: Theme.of(context).textTheme.headlineLarge?.copyWith(color: Theme.of(context).cardColor,
               fontWeight: FontWeight.w900), 
             ),
+            ElevatedButton(onPressed: _incrementCounter, child: const Icon(Icons.map)),
+            Text(isPressed ? "pressed":  " not pressed"),
+            InkWell(onTap: () {
+               _incrementCounter;
+            },
+            child: Text("InkWell"),)
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: _incrementCounter,
+      //   tooltip: 'Increment',
+      //   child: const Icon(Icons.add),
+      // ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
