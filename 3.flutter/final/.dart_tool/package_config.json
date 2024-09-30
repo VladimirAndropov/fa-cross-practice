@@ -3,403 +3,403 @@
   "packages": [
     {
       "name": "archive",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/archive-3.3.5",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/archive-3.3.5",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "async",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/async-2.11.0",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/async-2.11.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "boolean_selector",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/boolean_selector-2.1.1",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/boolean_selector-2.1.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "camera",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/camera-0.8.1+7",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/camera-0.8.1+7",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "camera_platform_interface",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/camera_platform_interface-2.3.1",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/camera_platform_interface-2.3.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "characters",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/characters-1.3.0",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/characters-1.3.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "clock",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/clock-1.1.1",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/clock-1.1.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "collection",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/collection-1.18.0",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/collection-1.18.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "convert",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/convert-3.1.1",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/convert-3.1.1",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "cross_file",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/cross_file-0.3.3+2",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/cross_file-0.3.3+2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "crypto",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/crypto-3.0.2",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/crypto-3.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "fake_async",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/fake_async-1.3.1",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/fake_async-1.3.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "ffi",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/ffi-1.2.1",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/ffi-1.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "file",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/file-6.1.4",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/file-6.1.4",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "flutter",
-      "rootUri": "file:///opt/flutter/packages/flutter",
+      "rootUri": "file:///C:/Users/alexe/OneDrive/%D0%A0%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9%20%D1%81%D1%82%D0%BE%D0%BB/4%20%D0%BA%D1%83%D1%80%D1%81/fa-cross-practice/3.flutter/flutter/packages/flutter",
       "packageUri": "lib/",
       "languageVersion": "3.3"
     },
     {
       "name": "flutter_lints",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/flutter_lints-2.0.1",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_lints-2.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "flutter_plugin_android_lifecycle",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.7",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.7",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "flutter_test",
-      "rootUri": "file:///opt/flutter/packages/flutter_test",
+      "rootUri": "file:///C:/Users/alexe/OneDrive/%D0%A0%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9%20%D1%81%D1%82%D0%BE%D0%BB/4%20%D0%BA%D1%83%D1%80%D1%81/fa-cross-practice/3.flutter/flutter/packages/flutter_test",
       "packageUri": "lib/",
       "languageVersion": "3.3"
     },
     {
       "name": "flutter_web_plugins",
-      "rootUri": "file:///opt/flutter/packages/flutter_web_plugins",
+      "rootUri": "file:///C:/Users/alexe/OneDrive/%D0%A0%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9%20%D1%81%D1%82%D0%BE%D0%BB/4%20%D0%BA%D1%83%D1%80%D1%81/fa-cross-practice/3.flutter/flutter/packages/flutter_web_plugins",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "http",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/http-0.13.5",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/http-0.13.5",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "http_parser",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/http_parser-4.0.2",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/http_parser-4.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "image",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/image-3.2.2",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/image-3.2.2",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
     {
       "name": "image_picker",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/image_picker-0.8.6",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker-0.8.6",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "image_picker_android",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/image_picker_android-0.8.5+3",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_android-0.8.5+3",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "image_picker_for_web",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/image_picker_for_web-2.1.10",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_for_web-2.1.10",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "image_picker_ios",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/image_picker_ios-0.8.6+1",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_ios-0.8.6+1",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "image_picker_platform_interface",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/image_picker_platform_interface-2.6.2",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_platform_interface-2.6.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "js",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/js-0.6.4",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/js-0.6.4",
       "packageUri": "lib/",
       "languageVersion": "2.16"
     },
     {
       "name": "leak_tracker",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/leak_tracker-10.0.5",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/leak_tracker-10.0.5",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "leak_tracker_flutter_testing",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/leak_tracker_flutter_testing-3.0.5",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/leak_tracker_flutter_testing-3.0.5",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "leak_tracker_testing",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/leak_tracker_testing-3.0.1",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/leak_tracker_testing-3.0.1",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "lints",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/lints-2.0.1",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/lints-2.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "matcher",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/matcher-0.12.16+1",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/matcher-0.12.16+1",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "material_color_utilities",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/material_color_utilities-0.11.1",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/material_color_utilities-0.11.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "meta",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/meta-1.15.0",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/meta-1.15.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "path",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/path-1.9.0",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/path-1.9.0",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "path_provider",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/path_provider-2.0.11",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider-2.0.11",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "path_provider_android",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/path_provider_android-2.0.22",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_android-2.0.22",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "path_provider_ios",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/path_provider_ios-2.0.11",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_ios-2.0.11",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "path_provider_linux",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/path_provider_linux-2.1.7",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_linux-2.1.7",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "path_provider_macos",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/path_provider_macos-2.0.6",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_macos-2.0.6",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "path_provider_platform_interface",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/path_provider_platform_interface-2.0.5",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_platform_interface-2.0.5",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "path_provider_windows",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/path_provider_windows-2.0.7",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_windows-2.0.7",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "pedantic",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/pedantic-1.11.1",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/pedantic-1.11.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "petitparser",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/petitparser-5.1.0",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/petitparser-5.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "platform",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/platform-3.1.0",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/platform-3.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "plugin_platform_interface",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/plugin_platform_interface-2.1.3",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/plugin_platform_interface-2.1.3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "pointycastle",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/pointycastle-3.6.2",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/pointycastle-3.6.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "process",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/process-4.2.4",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/process-4.2.4",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "quiver",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/quiver-3.1.0",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/quiver-3.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "sky_engine",
-      "rootUri": "file:///opt/flutter/bin/cache/pkg/sky_engine",
+      "rootUri": "file:///C:/Users/alexe/OneDrive/%D0%A0%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9%20%D1%81%D1%82%D0%BE%D0%BB/4%20%D0%BA%D1%83%D1%80%D1%81/fa-cross-practice/3.flutter/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "source_span",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/source_span-1.10.0",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/source_span-1.10.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "stack_trace",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/stack_trace-1.11.1",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/stack_trace-1.11.1",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "stream_channel",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/stream_channel-2.1.2",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/stream_channel-2.1.2",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "stream_transform",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/stream_transform-2.1.0",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/stream_transform-2.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "string_scanner",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/string_scanner-1.2.0",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/string_scanner-1.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "term_glyph",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/term_glyph-1.2.1",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/term_glyph-1.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "test_api",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/test_api-0.7.2",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/test_api-0.7.2",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "tflite_flutter",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/tflite_flutter-0.9.0",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/tflite_flutter-0.9.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "tflite_flutter_helper",
-      "rootUri": "file:///home/vladimir/.pub-cache/git/tflite_flutter_helper-783f15e5a87126159147d8ea30b98eea9207ac70/",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/git/tflite_flutter_helper-783f15e5a87126159147d8ea30b98eea9207ac70/",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "tuple",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/tuple-2.0.1",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/tuple-2.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "typed_data",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/typed_data-1.3.1",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/typed_data-1.3.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "vector_math",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/vector_math-2.1.4",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/vector_math-2.1.4",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "vm_service",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/vm_service-14.2.5",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/vm_service-14.2.5",
       "packageUri": "lib/",
       "languageVersion": "3.3"
     },
     {
       "name": "win32",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/win32-2.6.1",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/win32-2.6.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "xdg_directories",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/xdg_directories-0.2.0+2",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/xdg_directories-0.2.0+2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "xml",
-      "rootUri": "file:///home/vladimir/.pub-cache/hosted/pub.dev/xml-6.1.0",
+      "rootUri": "file:///C:/Users/alexe/AppData/Local/Pub/Cache/hosted/pub.dev/xml-6.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -410,10 +410,10 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2024-09-12T10:06:57.950760Z",
+  "generated": "2024-09-10T09:32:38.411132Z",
   "generator": "pub",
   "generatorVersion": "3.5.2",
-  "flutterRoot": "file:///opt/flutter",
+  "flutterRoot": "file:///C:/Users/alexe/OneDrive/%D0%A0%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9%20%D1%81%D1%82%D0%BE%D0%BB/4%20%D0%BA%D1%83%D1%80%D1%81/fa-cross-practice/3.flutter/flutter",
   "flutterVersion": "3.24.2",
-  "pubCache": "file:///home/vladimir/.pub-cache"
+  "pubCache": "file:///C:/Users/alexe/AppData/Local/Pub/Cache"
 }
