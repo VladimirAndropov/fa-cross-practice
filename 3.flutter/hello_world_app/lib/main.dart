@@ -12,21 +12,21 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         colorScheme: const ColorScheme.light(
-          onPrimary: Colors.red,
+          onSurface: Colors.red,
         ),
         useMaterial3: true,
       ),
       home: Builder(
-        builder: (context) => Scaffold(
-          body: Center(
-            child: Text(
-              'Hello World!',
-              style: TextStyle(
-                  color: Theme.of(context).colorScheme.onPrimary,
-                  fontSize: MediaQuery.of(context).size.width / 7),
+        builder: (context) {
+          return Scaffold(
+            body: Center(
+              child: Text(
+                'Hello World!',
+                style: Theme.of(context).textTheme.displayLarge,
+              ),
             ),
-          ),
-        ),
+          );
+        }
       ),
     );
   }
