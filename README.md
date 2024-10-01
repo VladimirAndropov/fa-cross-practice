@@ -1,4 +1,4 @@
-<img width="1300" alt="NAzarova" src="https://github.com/user-attachments/assets/90254e1b-46de-4667-b91a-b80c4f91fd63">
+
 
 
 
@@ -12,6 +12,7 @@
 * [Кроссплатформенная разработка мобильных программ](#кроссплатформенная-разработка-мобильных-программ) 12 баллов
 
 _______________
+<img width="1023" alt="Снимок экрана 2024-09-03 в 13 05 50" src="https://github.com/user-attachments/assets/98ffbc5e-5667-4b87-88a3-94c2630da208">
 
 <img width="1300" alt="NAzarova" src="https://github.com/user-attachments/assets/a59605da-3b93-4ce9-b892-5880afb68476">
 
