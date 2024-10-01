@@ -56,21 +56,8 @@ class _CameraAppState extends State<CameraApp> {
     if (!controller.value.isInitialized) {
       return Container();
     }
-
     return MaterialApp(
-      home: Scaffold(
-        body: Stack(
-          children: [
-            // This expands the camera preview to fill the screen.
-            Center(
-              child: AspectRatio(
-                aspectRatio: controller.value.aspectRatio,
-                child: CameraPreview(controller),
-              ),
-            ),
-          ],
-        ),
-      ),
+      home: CameraPreview(controller),
     );
   }
 }
