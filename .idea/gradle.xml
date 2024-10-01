@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
@@ -10,62 +11,77 @@
             <option value="$PROJECT_DIR$/../../../../Учёба/4_курс/Кроссплатформенная разработка/fa-cross-practice/3.flutter/flutter-tflite/android" />
           </set>
         </option>
+        <option name="resolveExternalAnnotations" value="false" />
       </GradleProjectSettings>
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/3.flutter/flutter-tflite/example/audio_classification/android" />
         <option name="gradleJvm" value="corretto-18" />
+        <option name="resolveExternalAnnotations" value="false" />
       </GradleProjectSettings>
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/3.flutter/flutter-tflite/example/bertqa/android" />
         <option name="gradleJvm" value="corretto-18" />
+        <option name="resolveExternalAnnotations" value="false" />
       </GradleProjectSettings>
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/3.flutter/flutter-tflite/example/digit_classification/android" />
         <option name="gradleJvm" value="corretto-18" />
+        <option name="resolveExternalAnnotations" value="false" />
       </GradleProjectSettings>
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/3.flutter/flutter-tflite/example/gesture_classification/android" />
-        <option name="gradleJvm" value="corretto-18" />
+        <option name="gradleJvm" value="jbr-17" />
+        <option name="resolveExternalAnnotations" value="false" />
       </GradleProjectSettings>
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/3.flutter/flutter-tflite/example/image_classification_mobilenet/android" />
         <option name="gradleJvm" value="corretto-18" />
+        <option name="resolveExternalAnnotations" value="false" />
       </GradleProjectSettings>
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/3.flutter/flutter-tflite/example/image_segmentation/android" />
         <option name="gradleJvm" value="corretto-18" />
+        <option name="resolveExternalAnnotations" value="false" />
       </GradleProjectSettings>
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/3.flutter/flutter-tflite/example/live_object_detection_ssd_mobilenet/android" />
         <option name="gradleJvm" value="corretto-18" />
+        <option name="resolveExternalAnnotations" value="false" />
       </GradleProjectSettings>
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/3.flutter/flutter-tflite/example/object_detection_ssd_mobilenet/android" />
-        <option name="gradleJvm" value="corretto-18" />
+        <option name="gradleJvm" value="jbr-17" />
+        <option name="resolveExternalAnnotations" value="false" />
       </GradleProjectSettings>
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/3.flutter/flutter-tflite/example/object_detection_ssd_mobilenet_v2/android" />
         <option name="gradleJvm" value="corretto-18" />
+        <option name="resolveExternalAnnotations" value="false" />
       </GradleProjectSettings>
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/3.flutter/flutter-tflite/example/pose_estimation/android" />
         <option name="gradleJvm" value="corretto-18" />
+        <option name="resolveExternalAnnotations" value="false" />
       </GradleProjectSettings>
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/3.flutter/flutter-tflite/example/reinforcement_learning/android" />
         <option name="gradleJvm" value="corretto-18" />
+        <option name="resolveExternalAnnotations" value="false" />
       </GradleProjectSettings>
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/3.flutter/flutter-tflite/example/style_transfer/android" />
         <option name="gradleJvm" value="corretto-18" />
+        <option name="resolveExternalAnnotations" value="false" />
       </GradleProjectSettings>
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/3.flutter/flutter-tflite/example/super_resolution_esrgan/android" />
         <option name="gradleJvm" value="corretto-18" />
+        <option name="resolveExternalAnnotations" value="false" />
       </GradleProjectSettings>
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/3.flutter/flutter-tflite/example/text_classification/android" />
         <option name="gradleJvm" value="corretto-18" />
+        <option name="resolveExternalAnnotations" value="false" />
       </GradleProjectSettings>
     </option>
   </component>
