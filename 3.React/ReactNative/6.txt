@@ -1,2 +1,0 @@
-| group   |     token  |
-|wff-cohort-1	| e1ed57ff-779c-48f1-9530-b8dff13e46b9 |																							
