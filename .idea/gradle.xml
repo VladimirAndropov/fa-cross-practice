@@ -30,7 +30,7 @@
       </GradleProjectSettings>
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/3.flutter/flutter-tflite/example/gesture_classification/android" />
-        <option name="gradleJvm" value="corretto-18" />
+        <option name="gradleJvm" value="jbr-17" />
         <option name="resolveExternalAnnotations" value="false" />
       </GradleProjectSettings>
       <GradleProjectSettings>
@@ -50,7 +50,7 @@
       </GradleProjectSettings>
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/3.flutter/flutter-tflite/example/object_detection_ssd_mobilenet/android" />
-        <option name="gradleJvm" value="corretto-18" />
+        <option name="gradleJvm" value="jbr-17" />
         <option name="resolveExternalAnnotations" value="false" />
       </GradleProjectSettings>
       <GradleProjectSettings>
