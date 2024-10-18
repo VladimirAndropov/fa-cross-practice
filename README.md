@@ -19,3 +19,6 @@
 
 Следующая половина семестра
 https://javarush.com/groups/posts/2488-obzor-rest-chastjh-3-sozdanie-restful-servisa-na-spring-boot?ysclid=m2eowootct134395658
+
+
+https://spring-projects.ru/guides/accessing-data-rest/
