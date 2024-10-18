@@ -16,3 +16,6 @@
 **Чтобы получить зачет автоматом, нужно набрать эти 20 баллов зачёта за счёт заданий на реакт. Набрать нужно до 17 декабря**
 
 *Присылайте скриншоты мне на почту vvandropov@fa.ru*
+
+Следующая половина семестра
+https://javarush.com/groups/posts/2488-obzor-rest-chastjh-3-sozdanie-restful-servisa-na-spring-boot?ysclid=m2eowootct134395658
