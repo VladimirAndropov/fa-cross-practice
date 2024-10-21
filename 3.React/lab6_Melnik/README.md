@@ -1,4 +1,4 @@
-import React from 'react';
+[import React from 'react';
 import { Text, View, TextInput, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -108,3 +108,4 @@ const styles = StyleSheet.create({
     fontFamily: 'Regular',
   },
 });
+](https://snack.expo.dev/@genudza/lab6)
