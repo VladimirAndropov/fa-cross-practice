@@ -1,5 +1,7 @@
+
+
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import Toast from 'react-native-toast-message';
 
 const Login = ({ navigation }) => {
@@ -7,24 +9,31 @@ const Login = ({ navigation }) => {
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    console.log("Logged in", email);
-
-    Toast.show({
-      type: 'success',
-      text1: 'Авторизация успешна!',
-      text2: `Добро пожаловать обратно!`
-    });
+    // Проверка введённых данных (например, не пустые поля)
+    if (email === '' || password === '') {
+      Toast.show({
+        type: 'error',
+        text1: 'Ошибка',
+        text2: 'Пожалуйста, заполните все поля!',
+      });
+    } else {
+      // Переход на экран приветствия с переданным email
+      navigation.navigate('Welcome', { email });
+      Toast.show({
+        type: 'success',
+        text1: 'Авторизация успешна!',
+        text2: `Добро пожаловать, ${email}!`,
+      });
+    }
   };
 
   return (
     <View style={styles.container}>
-      <Image
-      source={'https://ouch-cdn2.icons8.com/-ShWh9LwoNcq_qo4m1haH2nwTB1eYFLmodTQkSZSxqU/rs:fit:456:456/extend:false/wm:1:re:0:0:0.8/wmid:ouch2/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9wbmcvNzk4/L2E2OGRjZGIyLTBh/ZTQtNDQyMS05MWZm/LTE0YmUxMDNlNGE4/NC5wbmc.png'}
-      style={styles.image} />
+      <Image source={'https://ouch-cdn2.icons8.com/-ShWh9LwoNcq_qo4m1haH2nwTB1eYFLmodTQkSZSxqU/rs:fit:456:456/extend:false/wm:1:re:0:0:0.8/wmid:ouch2/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9wbmcvNzk4/L2E2OGRjZGIyLTBh/ZTQtNDQyMS05MWZm/LTE0YmUxMDNlNGE4/NC5wbmc.png'} style={styles.image} />
       <Text style={styles.title}>Вход</Text>
       <TextInput
         style={styles.input}
-        placeholder="Почта"
+        placeholder="Email"
         value={email}
         onChangeText={setEmail}
       />
@@ -92,3 +101,4 @@ const styles = StyleSheet.create({
 });
 
 export default Login;
+

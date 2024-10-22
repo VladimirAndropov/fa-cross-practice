@@ -1,27 +1,33 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import Toast from 'react-native-toast-message';
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 
-const Login = ({ navigation }) => {
+
+const Registration = ({ navigation }) => {
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
-    console.log("Logged in", email);
-
+  const handleRegistration = () => {
     Toast.show({
       type: 'success',
-      text1: 'Авторизация успешна!',
-      text2: `Добро пожаловать обратно!`
+      text1: 'Регистрация успешна!',
+      text2: `Добро пожаловать, ${username}!`
     });
   };
 
-  return (
+return (
     <View style={styles.container}>
       <Image
       source={'https://ouch-cdn2.icons8.com/-ShWh9LwoNcq_qo4m1haH2nwTB1eYFLmodTQkSZSxqU/rs:fit:456:456/extend:false/wm:1:re:0:0:0.8/wmid:ouch2/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9wbmcvNzk4/L2E2OGRjZGIyLTBh/ZTQtNDQyMS05MWZm/LTE0YmUxMDNlNGE4/NC5wbmc.png'}
       style={styles.image} />
-      <Text style={styles.title}>Вход</Text>
+      <Text style={styles.title}>Регистрация</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Имя пользователя"
+        value={username}
+        onChangeText={setUsername}
+      />
       <TextInput
         style={styles.input}
         placeholder="Почта"
@@ -35,11 +41,11 @@ const Login = ({ navigation }) => {
         onChangeText={setPassword}
         secureTextEntry
       />
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Войти</Text>
+      <TouchableOpacity style={styles.button} onPress={handleRegistration}>
+        <Text style={styles.buttonText}>Зарегистрироваться</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Registration')}>
-        <Text style={styles.textButton}>Нет аккаунта? Зарегистрироваться</Text>
+      <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+        <Text style={styles.textButton}>Уже есть аккаунт? Войти</Text>
       </TouchableOpacity>
     </View>
   );
@@ -91,4 +97,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login;
+
+export default Registration;
