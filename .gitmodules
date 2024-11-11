@@ -34,3 +34,6 @@
 [submodule "3.flutter/flutter-tflite"]
 	path = 3.flutter/flutter-tflite
 	url = https://github.com/tensorflow/flutter-tflite
+[submodule "2.flutter/flutter_architecture_samples"]
+	path = 2.flutter/flutter_architecture_samples
+	url = https://github.com/brianegan/flutter_architecture_samples
