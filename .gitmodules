@@ -1,36 +1,4 @@
-[submodule "1.CPP/CrossPlatform_Programming_Course"]
-	path = 1.CPP/CrossPlatform_Programming_Course
-	url = https://github.com/Kenobichek/CrossPlatform_Programming_Course
-[submodule "1.java/CrossPlatformProgCourse"]
-	path = 1.java/CrossPlatformProgCourse
-	url = https://github.com/MaksymAndreiev/CrossPlatformProgCourse
-[submodule "2.Vue/TDS200_h22_exam"]
-	path = 2.Vue/TDS200_h22_exam
-	url = https://github.com/runejac/TDS200_h22_exam
-[submodule "1.csharp/CrossPlatformProgramming"]
-	path = 1.csharp/CrossPlatformProgramming
-	url = https://github.com/Ilesha23/CrossPlatformProgramming
-[submodule "2.Swift/courses-app"]
-	path = 2.Swift/courses-app
-	url = https://github.com/enumcase/courses-app
-[submodule "3.React/React-Native-Playground"]
-	path = 3.React/React-Native-Playground
-	url = https://github.com/MrCrabz/React-Native-Playground
-[submodule "1.java/CrossplatformDeveloping"]
-	path = 1.java/CrossplatformDeveloping
-	url = https://github.com/MatviySuk/CrossplatformDeveloping/
-[submodule "2.electron/4-course-crossplatform"]
-	path = 2.electron/4-course-crossplatform
-	url = https://github.com/aodewanai/4-course-crossplatform
-[submodule "1.csharp/crossplatform-programming"]
-	path = 1.csharp/crossplatform-programming
-	url = https://github.com/sbohatko/crossplatform-programming
-[submodule "3.React/crossplatform-mobile"]
-	path = 3.React/crossplatform-mobile
-	url = https://github.com/Sam-Razavi/crossplatform-mobile
-[submodule "3.flutter/Computer-vision-mobile-app"]
-	path = 3.flutter/Computer-vision-mobile-app
-	url = https://github.com/lyon-zas/Computer-vision-mobile-app
+
 [submodule "3.flutter/flutter-tflite"]
 	path = 3.flutter/flutter-tflite
 	url = https://github.com/tensorflow/flutter-tflite
