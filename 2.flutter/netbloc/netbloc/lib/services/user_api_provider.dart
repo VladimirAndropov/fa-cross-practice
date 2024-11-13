@@ -9,7 +9,7 @@ Future<List<User>> getUsers() async {
   // This example uses the Google Books API to search for books about http.
   // https://ruz.fa.ru/api/schedule/group/137269?start=2024.10.10&finish=2024.11.11
   var url =
-      Uri.https('ruz.fa.ru', '/api/schedule/group/137269?start=2024.10.10&finish=2024.11.11', {'q': '{http}'});
+      Uri.parse('https://ruz.fa.ru/api/search?type=person&term=А');
 
   // Await the http get response, then decode the json-formatted response.
   var response = await http.get(url);

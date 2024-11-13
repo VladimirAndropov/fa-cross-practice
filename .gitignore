@@ -9,6 +9,7 @@
 .buildlog/
 .history
 .svn/
+.~lock.brs-cross.xlsx#
 
 # IntelliJ related
 *.iml
