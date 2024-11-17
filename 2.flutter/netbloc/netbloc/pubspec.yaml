@@ -37,7 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   http: ^1.2.2
   flutter_bloc: ^8.1.6
-  alphabet_list_view: ^1.1.1
+
 
 dev_dependencies:
   flutter_test:

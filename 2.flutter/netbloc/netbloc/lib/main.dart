@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/user_bloc.dart';
 import '../services/users_repository.dart';
-import 'package:alphabet_list_view/alphabet_list_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -48,10 +47,10 @@ class HomePage extends StatelessWidget {
             // in the middle of the parent.
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[ActionButtons(), Expanded(child: UsersList())],
+              children: <Widget>[ Expanded(child: UsersList())],
             ),
           ),
-          
+          floatingActionButton: ActionButtons(),
         ));
   }
 }
@@ -63,20 +62,21 @@ class ActionButtons extends StatelessWidget {
     UserBloc userBloc = BlocProvider.of<UserBloc>(context);
     // TODO: implement build
      return Row(
+      mainAxisAlignment : MainAxisAlignment.end,
        children: <Widget>[
-        MaterialButton(
+        IconButton(
           onPressed: (){
             userBloc.add(LoadUserEvent());
           }, 
-          child: Text("load"),
-          color: Colors.red,
+          icon:Icon(Icons.play_circle_outline_outlined),
+          color: Colors.blue,
           ),
 
-        MaterialButton(
+        IconButton(
           onPressed: (){
             userBloc.add(ClearUserEvent());
           }, 
-          child: Text("clear"),
+          icon: Icon(Icons.cleaning_services_outlined),
           color: Colors.green,
           ),
            
