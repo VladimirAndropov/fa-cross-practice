@@ -613,6 +613,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.2"
+  time_scheduler_table:
+    dependency: "direct main"
+    description:
+      name: time_scheduler_table
+      sha256: "3a0f2ca77f0c782ed679e6929250dcc1cbe818f7fa0d4aa7dab909a6d673d9e6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   timing:
     dependency: transitive
     description:

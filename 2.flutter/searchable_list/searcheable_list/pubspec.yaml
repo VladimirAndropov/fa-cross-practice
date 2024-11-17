@@ -9,25 +9,20 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  alphabet_search_view: ^2.0.0
-  json_annotation: ^4.0.1
+
+
 
   intl: ^0.18.0
   http: ^1.2.2
   flutter_bloc: ^8.1.6
-  csv: ^6.0.0
-  faker_dart: ^0.2.2
-  fast_csv: ^0.2.11
-  json_helpers: ^0.1.5
-  searchable_listview: ^2.15.2
+
   loadmore_listview: ^1.0.7
+  time_scheduler_table: ^1.0.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
-  build_runner: any
-  json_serializable: any
 
 flutter:
   uses-material-design: true
