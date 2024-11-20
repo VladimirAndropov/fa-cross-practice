@@ -3,6 +3,8 @@ import 'package:console/console.dart' as console;
 // import 'dart:math';
 import 'dart:convert';
 
+import 'package:intl/intl.dart';
+
 // import 'package:flutter/services.dart' show rootBundle;
 
 
@@ -69,11 +71,11 @@ void main(List<String> arguments) {
 
     print(users);
     final res = json.encode(users);
-    List<dynamic> data = json.decode(res);
-  List<DataItem> users2 =
-      List<DataItem>.from(data.map<DataItem>((dynamic e) => DataItem.fromJson(e)));
+    List<dynamic> parsed = json.decode(res);
+  List<DataItem> listItems =
+      List<DataItem>.from(parsed.map<DataItem>((dynamic e) => DataItem.fromJson(e)));
 
-  print(users2);
+  print(listItems);
 //     List<dynamic> jsonList = json.decode(jsonString);
 //      print(jsonList);
 //     var parsed = json.decode(jsonString).cast<Map<String, dynamic>>();
@@ -82,7 +84,9 @@ void main(List<String> arguments) {
 //      print(jsons);
 //   final u1 = DataItem.fromJson(json.decode(parsed));
 //    print(u1);
+// CalendarEventData event2 = CalendarEventData(date: DateTime.parse('2024-11-18 03:00:00.000'), startTime: DateTime.parse('2024-11-18 00:00:00.000'), endTime: DateTime.parse('2024-11-18 23:50:00.000'), event: null, title: 'title', description: 'desc', endDate: DateTime.parse('2024-11-19 00:00:00.000'));
 
+ date: DateFormat('yyyy.mm.dd').parse(json['date'] as String),DateFormat('y.MM.dd').parse(dmyString);
 // List<DataItem> users2 = List<DataItem>.from(jsons.map<DataItem>((dynamic e) => DataItem.fromJson(e)));
  print(users2);
     //   list = users2.map( (item) {
@@ -91,3 +95,4 @@ void main(List<String> arguments) {
     // ).toList();
  print(list);
   }
+

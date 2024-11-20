@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:loadmore_listview/loadmore_listview.dart';
 
 import 'dart:convert';
@@ -172,11 +171,7 @@ class _MyAppState extends State<LoadMoreListV>
   }
 
   Future<List<DataItem>> loaMoreList() async {
-    String jsonString = await rootBundle.loadString('assets/prepods.json');
-    List<dynamic> parsed = json.decode(jsonString);
 
-    listItems = List<DataItem>.from(
-        parsed.map<DataItem>((dynamic e) => DataItem.fromJson(e)));
 
     setState(() {
       _hasNextData = listItems.length < 100;
