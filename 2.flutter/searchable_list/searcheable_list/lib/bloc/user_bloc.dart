@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:searcheable_list/models/user.dart';
+
 import 'package:searcheable_list/services/users_repository.dart';
+import 'package:time_scheduler_table/time_scheduler_table.dart';
 
 
 abstract class UserEvent {}
@@ -15,7 +16,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<LoadUserEvent>((event, emit) async {
       emit(Loading());
       try {
-        List<User> users = await usersRepository.getAllUsers();
+        List<Event> users = await usersRepository.getAllUsers();
         emit(Loaded(loadedusers: users));
       } catch (e) {
         emit(Error());
@@ -34,7 +35,7 @@ class Initial extends UserState {}
 class Loading extends UserState {}
 
 class Loaded extends UserState {
-  List<User> loadedusers;
+  List<Event> loadedusers;
   Loaded({required this.loadedusers});
 }
 
