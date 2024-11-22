@@ -1,8 +1,6 @@
 
 import 'package:flutter/material.dart';
-
 import 'package:searcheable_list/examples/sheduling_calendar.dart';
-
 import 'package:searcheable_list/examples/loadmore_listview.dart';
 
 
@@ -12,12 +10,12 @@ void main() {
 
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: FloatingButtons(title: 'Flutter Demo Home Page'),
+    return const MaterialApp(
+       home: FloatingButtons(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -34,13 +32,14 @@ class FloatingButtons extends StatefulWidget {
 
 class _MyFloatingButtonsState extends State<FloatingButtons> {
   bool _widget = true;
+   
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+        return Scaffold(
         appBar: AppBar(
-          title: const Text('Load More and Refresh'),
+          title:  Text(widget.title),
         ),
-        body: _widget ? LoadMoreListV(): ShedulingCalendar(),
+        body: _widget ? const LoadMoreListV(): const ShedulingCalendar(),
         floatingActionButton:  
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -55,7 +54,7 @@ class _MyFloatingButtonsState extends State<FloatingButtons> {
         tooltip: 'false',
         child: const Icon(Icons.calendar_month_outlined),
       ), 
-        ],
+              ],
      // This trailing comma makes auto-formatting nicer for build methods.
     ),
     );
