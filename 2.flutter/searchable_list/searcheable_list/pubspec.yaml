@@ -17,7 +17,7 @@ dependencies:
   flutter_bloc: ^8.1.6
   loadmore_listview: ^1.0.7
   time_scheduler_table:
-    path: /home/vladimir/fa-practics/fa-cross-practice/2.flutter/time_scheduler_table/
+    path: C:/Users/vvandropov/facross2211/fa-cross-practice/2.flutter/time_scheduler_table/
   
   calendar_view: ^1.3.0
 

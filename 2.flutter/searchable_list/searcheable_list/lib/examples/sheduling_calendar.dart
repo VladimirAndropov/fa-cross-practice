@@ -43,12 +43,7 @@ class _ShedulingCalendarState extends State<ShedulingCalendar>
 "Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"
         ],
         rowLabels: const [ // You can assign any value to rowLabels. For Example : ['Row 1','Row 2','Row 3', ...]
-          '00:00 - 10:00',
-          '1:40 - 11:40',
-          '3:20 - 13:20',
-          '5:00 - 15:30',
-          '6:40 - 17:10',
-          '7:20 - 18:50',
+         
           '08:30 - 10:00',
           '10:10 - 11:40',
           '11:50 - 13:20',
@@ -56,8 +51,7 @@ class _ShedulingCalendarState extends State<ShedulingCalendar>
           '15:40 - 17:10',
           '17:20 - 18:50',
           '18:55 - 20:25',
-          '20:30 - 22:00',
-          '22:40'
+          '20:30 - 22:00'
           
         ],
             // column & row labels can be added
@@ -102,22 +96,22 @@ class _ShedulingCalendarState extends State<ShedulingCalendar>
  Future getEventList() async {
     // eventList.clear();
 
-     var url =
-      Uri.parse('https://ruz.fa.ru/api/schedule/person/8487e5d1-d82e-11e8-b636-005056bf5929?start=2024.11.18&finish=2024.11.24');
+    //  var url =
+    //   Uri.parse('https://ruz.fa.ru/api/schedule/person/8487e5d1-d82e-11e8-b636-005056bf5929?start=2024.11.18&finish=2024.11.24');
 
   // Await the http get response, then decode the json-formatted response.
-  var response = await http.get(url);
-  if (response.statusCode == 200) {
-    final List<dynamic> jsonResponse = json.decode(response.body);
-    eventList = List<Event>.from(
-          jsonResponse.map<Event>((dynamic e) => Event.fromJson(e))); 
+  // var response = await http.get(url);
+  // if (response.statusCode == 200) {
+  //   final List<dynamic> jsonResponse = json.decode(response.body);
+  //   eventList = List<Event>.from(
+  //         jsonResponse.map<Event>((dynamic e) => Event.fromJson(e))); 
 
-  } else {
+  // } else {
     String jsonString = await rootBundle.loadString('assets/andropov.json');
     List<dynamic> jsonResponse = json.decode(jsonString);
     eventList = List<Event>.from(
           jsonResponse.map<Event>((dynamic e) => Event.fromJson(e))); 
-  }
+  // }
     setState(() {
       eventList = eventList;   
       });

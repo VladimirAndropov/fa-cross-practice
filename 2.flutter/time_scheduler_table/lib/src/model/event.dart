@@ -30,7 +30,7 @@ class Event {
         title: (json['lecturer'] as String?) ?? '',
         time: (json['kindOfWork'] as String?) ?? '',
         columnIndex: DateFormat('y.MM.dd').parse(json['date']).weekday - 1,
-        rowIndex: (((DateFormat('H:mm').parse(json['beginLesson']).hour)/2.4+(DateFormat('H:mm').parse(json['beginLesson']).minute)/60)*1.6).toInt(),
+        rowIndex: (((DateFormat('H:mm').parse(json['beginLesson']).hour)*60+(DateFormat('H:mm').parse(json['beginLesson']).minute))/96).toInt()-5,
         // date: DateFormat('y.MM.dd').parse(json['date'] as String),
         // startTime:DateFormat('y.MM.dd H:mm').parse(json['date'] +' '+ json['beginLesson']),
         // endTime: DateFormat('y.MM.dd H:mm').parse(json['date'] +' '+ json['endLesson']),

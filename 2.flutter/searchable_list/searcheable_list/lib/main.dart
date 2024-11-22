@@ -10,12 +10,12 @@ void main() {
 
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: FloatingButtons(title: 'Flutter Demo Home Page'),
+    return const MaterialApp(
+       home: FloatingButtons(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -39,7 +39,7 @@ class _MyFloatingButtonsState extends State<FloatingButtons> {
         appBar: AppBar(
           title:  Text(widget.title),
         ),
-        body: _widget ? LoadMoreListV(): ShedulingCalendar(),
+        body: _widget ? const LoadMoreListV(): const ShedulingCalendar(),
         floatingActionButton:  
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
