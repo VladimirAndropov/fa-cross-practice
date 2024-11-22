@@ -259,8 +259,8 @@ packages:
   time_scheduler_table:
     dependency: "direct main"
     description:
-      path: "C:\\Users\\vvandropov\\facross2211\\fa-cross-practice\\2.flutter\\time_scheduler_table"
-      relative: false
+      path: "../../time_scheduler_table"
+      relative: true
     source: path
     version: "1.0.1"
   typed_data:
