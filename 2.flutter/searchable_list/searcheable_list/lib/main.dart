@@ -1,13 +1,19 @@
-
 import 'package:flutter/material.dart';
-import 'package:searcheable_list/examples/sheduling_calendar.dart';
 import 'package:searcheable_list/examples/loadmore_listview.dart';
+import 'package:provider/provider.dart';
+
 
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => Counts()),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
-
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -15,7 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-       home: FloatingButtons(title: 'Flutter Demo Home Page'),
+      home: FloatingButtons(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -29,34 +35,35 @@ class FloatingButtons extends StatefulWidget {
   State<FloatingButtons> createState() => _MyFloatingButtonsState();
 }
 
-
 class _MyFloatingButtonsState extends State<FloatingButtons> {
-  bool _widget = true;
-   
+
   @override
   Widget build(BuildContext context) {
-        return Scaffold(
-        appBar: AppBar(
-          title:  Text(widget.title),
-        ),
-        body: _widget ? const LoadMoreListV(): const ShedulingCalendar(),
-        floatingActionButton:  
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body:  LoadMoreListV(),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
-           FloatingActionButton(
-        onPressed: (){setState(() => _widget = true);},
-        tooltip: 'true',
-        child: const Icon(Icons.people),
-      ), 
-      FloatingActionButton(
-        onPressed: (){setState(() => _widget = false);},
-        tooltip: 'false',
-        child: const Icon(Icons.calendar_month_outlined),
-      ), 
-              ],
-     // This trailing comma makes auto-formatting nicer for build methods.
-    ),
+          FloatingActionButton(
+            onPressed: () {
+              context.read<Counts>().setcounter('');
+            },
+            tooltip: 'true',
+            child: const Icon(Icons.people),
+          ),
+          FloatingActionButton(
+            onPressed: () {
+              context.read<Counts>().setcounter('2');
+            },
+            tooltip: 'false',
+            child: const Icon(Icons.calendar_month_outlined),
+          ),
+        ],
+        // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }

@@ -6,9 +6,9 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart' show rootBundle;
 
 class ShedulingCalendar extends StatefulWidget {
-  const ShedulingCalendar({super.key });
+  const ShedulingCalendar({super.key, required this.id });
 
- 
+  final String id;
   
   @override
   State<ShedulingCalendar> createState() => _ShedulingCalendarState();
@@ -17,6 +17,7 @@ class ShedulingCalendar extends StatefulWidget {
 class _ShedulingCalendarState extends State<ShedulingCalendar>
     with SingleTickerProviderStateMixin {
   
+
   List<Event> eventList = [];
 
   @override
@@ -105,7 +106,7 @@ class _ShedulingCalendarState extends State<ShedulingCalendar>
   //   final List<dynamic> jsonResponse = json.decode(response.body);
   //   eventList = List<Event>.from(
   //         jsonResponse.map<Event>((dynamic e) => Event.fromJson(e))); 
-
+print(widget.id);
   // } else {
     String jsonString = await rootBundle.loadString('assets/andropov.json');
     List<dynamic> jsonResponse = json.decode(jsonString);

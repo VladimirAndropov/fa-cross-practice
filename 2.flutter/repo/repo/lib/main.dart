@@ -1,92 +1,71 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:provider/provider.dart';
+import 'package:repo/examples/buttons.dart';
+import 'package:repo/examples/counter.dart';
 
-void main() {
-  runApp(ProviderScope(child: MultipleCategorySelection()));
+class Counts with ChangeNotifier {
+  String _count = 'false';
+  String get count => _count;
+
+  void add(name) {
+    _count = name;
+    notifyListeners();
+  }
+
+  void remove() {
+    _count= 'false';
+    notifyListeners();
+  }
 }
 
-final articleRepository = Provider<ArticleRepository>(
-  (ref) => FakeArticleRepository(),
-);
 
-final articles = FutureProvider<List<Article>>((ref) async {
-  return ref.watch(articleRepository).fetchArticles();
-});
 
-class MultipleCategorySelection extends StatelessWidget {
+
+void main() {
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => Counts()),
+      ],
+      child: MyApp(),
+    ),
+  );
+}
+
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.green,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+        primarySwatch: Colors.blue,
       ),
-      home: Scaffold(
-        appBar: AppBar(title: Text("Flutter Riverpod Future")),
-        body: Column(
-          children: [
-            ArticleList(),
-          ],
+      home: Home(),
+    );
+  }
+}
+
+class Home extends StatelessWidget {
+  
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Provider'),
+      ),
+      body: ChangeNotifierProvider(
+        create: (BuildContext context) => Counts(),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Counter(),
+              Buttons(),
+              
+            ],
+          ),
         ),
       ),
     );
   }
-}
-
-class ArticleList extends HookConsumerWidget {
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final article = ref.watch(articles);
-    return article.when(
-        loading: () => Center(child: const CircularProgressIndicator()),
-        error: (err, stack) => Text('Error: $err'),
-        data: (articles) {
-          return Flexible(
-            child: ListView.builder(
-                itemCount: articles.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return ListTile(
-                      title: Text(articles[index].name),
-                      subtitle: Row(
-                        children: [
-                          Icon(Icons.thumb_up),
-                          Text(" ${articles[index].likes}")
-                        ],
-                      ));
-                }),
-          );
-        });
-  }
-}
-
-abstract class ArticleRepository {
-  Future<List<Article>> fetchArticles();
-}
-
-class FakeArticleRepository implements ArticleRepository {
-  @override
-  Future<List<Article>> fetchArticles() {
-    return Future.delayed(
-      Duration(milliseconds: 1000),
-      () {
-        var r = Random();
-        return [
-          Article("Flutter Riverpod Testing – Example", r.nextInt(30)),
-          Article("Flutter Hooks – Testing Your Widgets", r.nextInt(30)),
-          Article("Riverpod State Management Example", r.nextInt(30)),
-          Article("Flutter Freezed – Working with Immutable’s", r.nextInt(30)),
-          Article("Animations on Value Changed with Riverpod", r.nextInt(30))
-        ];
-      },
-    );
-  }
-}
-
-class Article {
-  final String name;
-  final int likes;
-
-  Article(this.name, this.likes);
 }

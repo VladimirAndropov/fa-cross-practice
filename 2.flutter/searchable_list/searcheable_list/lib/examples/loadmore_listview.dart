@@ -3,11 +3,23 @@ import 'package:loadmore_listview/loadmore_listview.dart';
 
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:provider/provider.dart';
+import 'package:searcheable_list/examples/sheduling_calendar.dart';
 
 
-// part 'person.g.dart';
 
-// @JsonSerializable(explicitToJson: true)
+
+class Counts with ChangeNotifier {
+  String _count = '';
+  String get getcounter => _count;
+
+  void setcounter(String id) {
+    _count = id;
+    notifyListeners();
+  }
+
+}
+
 class DataItem {
   final String id;
   final String label;
@@ -59,6 +71,7 @@ class _MyAppState extends State<LoadMoreListV>
 
   bool _hasNextData = true;
   List<DataItem> listItems = [];
+String prepodid = '';
 
   @override
   void initState() {
@@ -68,9 +81,12 @@ class _MyAppState extends State<LoadMoreListV>
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        
+    return prepodid !=''
+            ? ShedulingCalendar(id: prepodid)
+            : ChangeNotifierProvider(
+        create: (BuildContext context) => Counts(),
+        child:  Column(
+      children: [ Text('getcounter= ${context.watch<Counts>().getcounter}'),       
         Expanded(
           child:  LoadMoreListView.separated(
                 hasMoreItem: _hasNextData,
@@ -87,7 +103,12 @@ class _MyAppState extends State<LoadMoreListV>
                 ),
                 itemCount: listItems.length,
                 itemBuilder: (context, index) {
-                  return Padding(
+                  return GestureDetector(
+      onTap: () {
+        prepodid = listItems[index].id;
+        print(prepodid) ;
+        },
+      child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 10,
                 vertical: 14,
@@ -139,14 +160,17 @@ class _MyAppState extends State<LoadMoreListV>
                   )
                 ],
               ),
-            );
+            )
+                  );
                 },
                 separatorBuilder: (context, index) {
                   return const Divider();
                 },
               ),
         ),
+        
       ],
+    )
     );
   }
 
