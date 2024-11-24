@@ -1,3 +1,8 @@
+
+// Это пример работы с синтаксисом Dart
+// Шпаргалка. Но она не особо пригодится
+
+
 import 'package:dart_application_1/dart_application_1.dart' as dart_application_1;
 import 'package:dart_application_1/hey.dart';// show hey hide hey3d;
 
