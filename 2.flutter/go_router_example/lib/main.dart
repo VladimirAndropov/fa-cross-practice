@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'examples/loadmore_listview.dart';
+import 'examples/sheduling_calendar.dart';
+import 'examples/news_list.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,24 +12,26 @@ class MyApp extends StatelessWidget {
   MyApp({super.key});
 
   final GoRouter _router = GoRouter(
-    initialLocation: '/main',
+    initialLocation: '/LoadMoreListV',
     routes: [
       StatefulShellRoute.indexedStack(
         builder:
             (BuildContext context, GoRouterState state, StatefulNavigationShell navigationShell) {
-          return ScaffoldNavBar(navigationShell: navigationShell);
-        },
+         return ScaffoldNavBar(navigationShell: navigationShell);
+                  },
         branches: <StatefulShellBranch>[
           StatefulShellBranch(
             routes: <RouteBase>[
               GoRoute(
-                path: '/main',
-                builder: (BuildContext context, GoRouterState state) => const MyHomePage(),
+                path: '/LoadMoreListV',
+                name: 'LoadMoreListV',
+                builder: (BuildContext context, GoRouterState state) => const LoadMoreListV(),
                 routes: <RouteBase>[
                   GoRoute(
-                    path: 'details',
+                    path: 'ShedulingCalendar/:id',
+                    name: 'ShedulingCalendar',
                     builder: (BuildContext context, GoRouterState state) =>
-                        const DetailPage('from Main Page'),
+                        ShedulingCalendar(id: state.pathParameters['id']),
                   ),
                 ],
               ),
@@ -35,15 +40,8 @@ class MyApp extends StatelessWidget {
           StatefulShellBranch(
             routes: <RouteBase>[
               GoRoute(
-                path: '/tabB',
-                builder: (BuildContext context, GoRouterState state) => const TabB(),
-                routes: <RouteBase>[
-                  GoRoute(
-                    path: 'details',
-                    builder: (BuildContext context, GoRouterState state) =>
-                        const DetailPage('from Tab B'),
-                  ),
-                ],
+                path: '/NewsList',
+                builder: (BuildContext context, GoRouterState state) => const NewsList(),               
               ),
             ],
           ),
@@ -81,8 +79,8 @@ class ScaffoldNavBar extends StatelessWidget {
       body: navigationShell,
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Main'),
-          BottomNavigationBarItem(icon: Icon(Icons.work), label: 'Tab b'),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Расписание преподавателей'),
+          BottomNavigationBarItem(icon: Icon(Icons.work), label: 'Расписание группы'),
         ],
         currentIndex: navigationShell.currentIndex,
         onTap: (int index) => _onTap(context, index),
@@ -94,107 +92,6 @@ class ScaffoldNavBar extends StatelessWidget {
     navigationShell.goBranch(
       index,
       initialLocation: index == navigationShell.currentIndex,
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, this.title = 'Home Page'});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
-    );
-  }
-}
-
-class DetailPage extends StatelessWidget {
-  const DetailPage(
-    this.text, {
-    super.key,
-  });
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Page $text'),
-      ),
-      body: Stack(
-        children: [
-          Center(
-            child: Text(text),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class TabB extends StatelessWidget {
-  const TabB({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('TOP page of Tab B'),
-        actions: [IconButton(onPressed: () => context.go('/main'), icon: const Icon(Icons.home))],
-      ),
-      body: Scrollbar(
-        trackVisibility: true,
-        child: ListView.builder(
-          itemCount: 25,
-          itemBuilder: (context, index) {
-            return InkWell(
-              onTap: () => context.go('/tabB/details'),
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: Text('item: $index'),
-              ),
-            );
-          },
-        ),
-      ),
     );
   }
 }

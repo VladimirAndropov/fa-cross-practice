@@ -3,6 +3,7 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  loadmore_listview
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
