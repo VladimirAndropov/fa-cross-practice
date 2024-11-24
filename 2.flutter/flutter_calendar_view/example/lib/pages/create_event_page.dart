@@ -9,10 +9,9 @@ class CreateEventPage extends StatelessWidget {
   const CreateEventPage({super.key, this.event});
 
   final CalendarEventData? event;
-   
+
   @override
   Widget build(BuildContext context) {
-    print(event);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,

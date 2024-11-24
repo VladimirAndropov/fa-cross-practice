@@ -1,16 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-    Future<void> _launchURL(String url) async {
-    final Uri uri = Uri.parse(url);
-    try {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
-    } catch (e) {
-      throw 'Unable to open link: $url';
-    }
-  }
-  
 class Post extends StatelessWidget {
   final String title;
   final String date;
@@ -30,30 +19,12 @@ class Post extends StatelessWidget {
     required this.onImageTap,
   });
 
-   factory Post.fromJson(Map<String, dynamic> json) { 
-      return Post(
-        title: (json['discipline'] as String?) ?? '',
-        text: (json['kindOfWork'] as String?) ?? '',
-        image: (json['lecturer'] as String?) ?? '',
-        imageUrl: (json['parentschedule'] as String?) ?? '',
-        url: (json['author'] as String?) ?? '',
-        date: (json['beginLesson'] as String?) ?? '',
-        onImageTap:   () {
-                      _launchURL('');
-                    },
-        // date: DateFormat('y.MM.dd').parse(json['date']) as String,// Переваем в строку
-        // onImageTap: (((DateFormat('H:mm').parse(json['beginLesson']).hour)/2.4+(DateFormat('H:mm').parse(json['beginLesson']).minute)/60)*1.6).toString,
-    );
-  }
-
-
-
   @override
   Widget build(BuildContext context) {
     String safeImageUrl = imageUrl.isNotEmpty ? imageUrl : '';
 
     return GestureDetector(
-      // onTap: onImageTap,
+      onTap: onImageTap,
       child: Card(
         margin: const EdgeInsets.symmetric(vertical: 10),
         shape: RoundedRectangleBorder(

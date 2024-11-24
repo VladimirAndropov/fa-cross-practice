@@ -294,7 +294,7 @@ class _AddOrEditEventFormState extends State<AddOrEditEventForm> {
       title: _titleController.text.trim(),
       description: _descriptionController.text.trim(),
     );
-print(event);
+
     widget.onEventAdd?.call(event);
     _resetForm();
   }

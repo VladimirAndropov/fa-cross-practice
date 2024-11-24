@@ -1,10 +1,9 @@
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:url_launcher/url_launcher.dart';
 import 'post.dart';
-import 'package:flutter/services.dart' show rootBundle;// для работы с файл
 
 void main() {
   runApp(const MyApp());
@@ -25,7 +24,7 @@ class Main extends StatefulWidget {
   const Main({super.key});
 
   @override
-  State<Main> createState() => _MainState();
+  _MainState createState() => _MainState();
 }
 
 class _MainState extends State<Main> {
@@ -39,18 +38,42 @@ class _MainState extends State<Main> {
     _fetchData();
   }
 
+  Future<void> _fetchData() async {
+    final response = await http.get(
+      Uri.parse('https://67190fb57fc4c5ff8f4c4767.mockapi.io/habr'),
+    );
 
+    if (response.statusCode == 200) {
+      String decodedBody = utf8.decode(response.bodyBytes);
+      setState(() {
+        items = json.decode(decodedBody);
+      });
+    } else {
+      if (kDebugMode) {
+        print('Error downloading data');
+      }
+    }
+  }
+
+  Future<void> _launchURL(String url) async {
+    final Uri uri = Uri.parse(url);
+    try {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } catch (e) {
+      throw 'Unable to open link: $url';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    // List<dynamic> filteredItems = items.where((item) {
-    //   int itemId = int.parse(item['id']);
-    //   if (selectedCategory == 'My feed') return itemId >= 1 && itemId <= 4;
-    //   if (selectedCategory == 'All streams') return true;
-    //   if (selectedCategory == 'Development') return itemId >= 8 && itemId <= 10;
-    //   if (selectedCategory == 'Marketing') return itemId >= 5 && itemId <= 7;
-    //   return item['category'] == selectedCategory;
-    // }).toList();
+    List<dynamic> filteredItems = items.where((item) {
+      int itemId = int.parse(item['id']);
+      if (selectedCategory == 'My feed') return itemId >= 1 && itemId <= 4;
+      if (selectedCategory == 'All streams') return true;
+      if (selectedCategory == 'Development') return itemId >= 8 && itemId <= 10;
+      if (selectedCategory == 'Marketing') return itemId >= 5 && itemId <= 7;
+      return item['category'] == selectedCategory;
+    }).toList();
 
     return Scaffold(
       key: _scaffoldKey,
@@ -161,17 +184,18 @@ class _MainState extends State<Main> {
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: items.length,
+                itemCount: filteredItems.length,
                 itemBuilder: (context, index) {
+                  var item = filteredItems[index];
                   return Post(
-                    title: items[index].title ,
-                    date: items[index].date ?? '',
-                    image: items[index].image ?? '',
-                    text: items[index].text ?? '',
-                    imageUrl: items[index].image ?? '',
-                    url: items[index].url ?? '',
+                    title: item['title'] ?? '',
+                    date: item['date'] ?? '',
+                    image: item['image'] ?? '',
+                    text: item['text'] ?? '',
+                    imageUrl: item['image'] ?? '',
+                    url: item['url'] ?? '',
                     onImageTap: () {
-                      _launchURL(items[index].url);
+                      _launchURL(item['url']);
                     },
                   );
                 },
@@ -181,36 +205,6 @@ class _MainState extends State<Main> {
         ),
       ),
     );
-  }
-
-    Future<void> _fetchData() async {
-    final response = await http.get(
-      Uri.parse('https://ruz.fa.ru/api/schedule/group/137269?start=2024.11.18&finish=2024.11.24'),
-    );
-
-     if (response.statusCode == 200) {
-    final List<dynamic> jsonResponse = json.decode(response.body);
-    items = List<Post>.from(
-          jsonResponse.map<Post>((dynamic e) => Post.fromJson(e))); 
-
-  } else {
-    String jsonString = await rootBundle.loadString('assets/andropov.json');
-    List<dynamic> jsonResponse = json.decode(jsonString);
-    items = List<Post>.from(
-          jsonResponse.map<Post>((dynamic e) => Post.fromJson(e))); 
-  }
-    setState(() {
-      items = items;   
-      });
-  }
-
-  Future<void> _launchURL(String url) async {
-    final Uri uri = Uri.parse(url);
-    try {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
-    } catch (e) {
-      throw 'Unable to open link: $url';
-    }
   }
 }
 

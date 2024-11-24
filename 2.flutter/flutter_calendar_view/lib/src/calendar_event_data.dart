@@ -3,7 +3,7 @@
 // that can be found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+
 import '../calendar_view.dart';
 
 @immutable
@@ -109,15 +109,6 @@ class CalendarEventData<T extends Object?> {
             currentDate.isAfter(date.withoutTime));
   }
 
-  factory CalendarEventData.fromJson(Map<String, dynamic> json) {
-    return CalendarEventData(
-        title: (json['lecturer'] as String?) ?? '',
-        description: (json['kindOfWork'] as String?) ?? '',
-        date: DateFormat('y.MM.dd').parse(json['date'] as String),
-        startTime:DateFormat('y.MM.dd H:mm').parse(json['date'] +' '+ json['beginLesson']),
-        endTime: DateFormat('y.MM.dd H:mm').parse(json['date'] +' '+ json['endLesson']),
-    );
-  }
   /// Returns event data in [Map<String, dynamic>] format.
   ///
   Map<String, dynamic> toJson() => {

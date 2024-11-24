@@ -19,15 +19,11 @@ class DayViewWidget extends StatelessWidget {
       key: state,
       width: width,
       startDuration: Duration(hours: 8),
-      showHalfHours: false,
-      heightPerMinute: 1,
-      startHour: 9,
-      endHour: 20,
-      minuteSlotSize: MinuteSlotSize.minutes30,
-      
+      showHalfHours: true,
+      heightPerMinute: 3,
       timeLineBuilder: _timeLineBuilder,
       scrollPhysics: const BouncingScrollPhysics(),
-      eventArranger: SideEventArranger(maxWidth: 450),
+      eventArranger: SideEventArranger(maxWidth: 30),
       hourIndicatorSettings: HourIndicatorSettings(
         color: Theme.of(context).dividerColor,
       ),
@@ -88,7 +84,7 @@ class DayViewWidget extends StatelessWidget {
       );
     }
 
-    final hour = (':00') ;
+    final hour = ((date.hour - 1) % 12) + 1;
     return Stack(
       clipBehavior: Clip.none,
       children: [
@@ -96,7 +92,7 @@ class DayViewWidget extends StatelessWidget {
           top: -8,
           right: 8,
           child: Text(
-            "${date.hour}$hour",
+            "$hour ${date.hour ~/ 12 == 0 ? "am" : "pm"}",
             textAlign: TextAlign.right,
           ),
         ),

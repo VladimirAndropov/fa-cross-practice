@@ -1,4 +1,31 @@
-A time table for Android & IOS where you can create events by clicking on cells, edit (update) and delete the events you have created. You can assign colors to events and if the name of the event is too long, you can see the full name and description by long pressing on the event.
+# Библиотека TimeSchedulerTable
+
+## Roadmap
+
+Чтобы приступить к этому уроку, нужно предварительно изучить по очереди:
+
+
+
+- 2.flutter/statefull/statefull
+- 2.flutter/flutter_calendar_view
+- 2.flutter/provider
+- 2.flutter/news_list
+- 2.flutter/netbloc/netbloc
+
+
+## Методичка
+
+Это готовый пример отредактированной библиотеки
+
+Не заудьте, что приложение запускается из папки example
+
+Перезайдите в ide Файл - Открыть папку - /example
+
+и рассмотрите этот файл - он уже отредактирован
+
+2.flutter/time_scheduler_table/example/lib/main.dart
+
+
 
 ## Features
 
