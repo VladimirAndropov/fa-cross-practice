@@ -27,8 +27,8 @@ class Event {
 
     factory Event.fromJson(Map<String, dynamic> json) { //import 'package:intl/intl.dart';
     return Event(
-        title: (json['lecturer'] as String?) ?? '',
-        time: (json['kindOfWork'] as String?) ?? '',
+        title: (json['discipline'] as String?) ?? '',
+        time: (json['group'] as String?) ?? '',
         columnIndex: DateFormat('y.MM.dd').parse(json['date']).weekday - 1,
         rowIndex: (((DateFormat('H:mm').parse(json['beginLesson']).hour)*60+(DateFormat('H:mm').parse(json['beginLesson']).minute))/96).toInt()-5,
         // date: DateFormat('y.MM.dd').parse(json['date'] as String),
