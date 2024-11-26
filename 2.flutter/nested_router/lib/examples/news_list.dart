@@ -39,7 +39,7 @@ class Main extends StatefulWidget {
 
 class _MainState extends State<Main> {
   List<dynamic> items = [];
-  late String thisselectedCategory;
+   String thisselectedCategory = '137226';
   List<dynamic> selectedCategory = [];
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -83,7 +83,7 @@ Future getList() async {
             drawer: Drawer(
         child: Container(
           width: 200,
-          color: const Color(0xFF303B44),
+          color: const Color.fromARGB(255, 199, 199, 199),
           child: Column(
             children: [
               Container(
