@@ -4,6 +4,21 @@ import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;// для работы с файл
 
 
+class Category {
+  final String id;
+  final String label;
+  final String description;
+
+  Category({required this.id, required this.label, required this.description});
+
+  factory Category.fromJson(Map<String, dynamic> json) {
+    return Category(
+        id: (json['id'] as String?) ?? '',
+        label: (json['label'] as String?) ?? '',
+        description: (json['description'] as String?) ?? '');
+  }
+}
+
 class NewsList extends StatelessWidget {
   const NewsList({super.key});
 
@@ -24,15 +39,29 @@ class Main extends StatefulWidget {
 
 class _MainState extends State<Main> {
   List<dynamic> items = [];
-  String selectedCategory = 'My feed';
+  late String thisselectedCategory;
+  List<dynamic> selectedCategory = [];
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => getList());
     _fetchData();
   }
 
+Future getList() async {
+    String jsonString = await rootBundle.loadString('assets/groups.json');
+    List<dynamic> parsed = json.decode(jsonString);
+
+// List<Map<String, dynamic>> ppp = parsed.cast<Map<String, dynamic>>();
+
+
+    setState(() {
+      selectedCategory = List<Category>.from(
+          parsed.map<Category>((dynamic e) => Category.fromJson(e)));
+    });
+  }
 
 
   @override
@@ -51,7 +80,48 @@ class _MainState extends State<Main> {
         ),
         
       ),
-      
+            drawer: Drawer(
+        child: Container(
+          width: 200,
+          color: const Color(0xFF303B44),
+          child: Column(
+            children: [
+              Container(
+                height: 100,
+                alignment: Alignment.center,
+                child: const Text(
+                  'Groups',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: ListView.builder(
+  itemCount: 10,
+  itemBuilder: (BuildContext context, int index) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+               thisselectedCategory =selectedCategory[index].id.toString();
+                        });
+                        Navigator.pop(context);
+      },
+      child: ListTile(
+      title: Text( selectedCategory[index].label),
+    )
+
+    );
+  },
+)
+
+              ),
+            ],
+          ),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -81,7 +151,7 @@ class _MainState extends State<Main> {
 
     Future<void> _fetchData() async {
     final response = await http.get(
-      Uri.parse('https://ruz.fa.ru/api/schedule/group/137269?start=2024.11.18&finish=2024.11.24'),
+      Uri.parse('https://ruz.fa.ru/api/schedule/group/$thisselectedCategory?start=2024.11.18&finish=2024.11.24'),
     );
 
      if (response.statusCode == 200) {
@@ -90,7 +160,7 @@ class _MainState extends State<Main> {
           jsonResponse.map<Post>((dynamic e) => Post.fromJson(e))); 
 
   } else {
-    String jsonString = await rootBundle.loadString('assets/andropov.json');
+    String jsonString = await rootBundle.loadString('assets/137226.json');
     List<dynamic> jsonResponse = json.decode(jsonString);
     items = List<Post>.from(
           jsonResponse.map<Post>((dynamic e) => Post.fromJson(e))); 
