@@ -24,27 +24,23 @@
 # Методичка
 В данном примере используется два виджета
 
-- Список преподавателей - 
-2.flutter/searchable_list/searcheable_list/lib/examples/loadmore_listview.dart
-- календарь - 2.flutter/searchable_list/searcheable_list/lib/examples/sheduling_calendar.dart
+Код запускался, поэтому сделайте 
 
-Обратите внимание, что между виджетами происходит переключение за счет переменной 
+  flutter clean
 
-```
-prepodid !=''
-            ? ShedulingCalendar(id: prepodid)
-            : ChangeNotifierProvider(
-```
-
-Параметры из одного виджета в другой передаются за счет провайдера
+чтобы очистить сборочные файлы
 
 
-```
+ Список преподавателей
+- lib/examples/prepods_list.dart
+- календарь - lib/examples/sheduling_calendar.dart
 
-MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => Counts()),
-      ],
-      child: MyApp(),
-```
+Список групп
+- lib/examples/group_list.dart
+- lib/examples/group_list_body.dart
 
+Обратите внимание, что вместо навигации используется роут
+
+Потренируйтесь с роутами - 2.flutter/go_router_example
+
+Удачи!
