@@ -41,7 +41,7 @@ class DataItem {
   }
 }
 void main(List<String> arguments) {
-  print('Hello world: ${console.calculate()}!');
+  // print('Hello world: ${console.calculate()}!');
 
 
 
@@ -75,12 +75,12 @@ void main(List<String> arguments) {
 //    print(u1);
 // CalendarEventData event2 = CalendarEventData(date: DateTime.parse('2024-11-18 03:00:00.000'), startTime: DateTime.parse('2024-11-18 00:00:00.000'), endTime: DateTime.parse('2024-11-18 23:50:00.000'), event: null, title: 'title', description: 'desc', endDate: DateTime.parse('2024-11-19 00:00:00.000'));
 
- var weekday = DateFormat('y.MM.dd').parse('2024.10.11').weekday;
-        //  ldate: DateFormat('y.MM.dd').parse(listItems['date']);
-var beginLessonH = DateFormat('H:mm').parse('11:00').hour;
-var beginLessonm = DateFormat('H:mm').parse('14:00').minute;
-print(beginLessonH);print(beginLessonm);
-var bb = (((DateFormat('H:mm').parse('11:00').hour)/2.4+(DateFormat('H:mm').parse('14:00').minute)/60)*1.6).toInt();
+//  var weekday = DateFormat('y.MM.dd').parse('2024.10.11').weekday;
+//         //  ldate: DateFormat('y.MM.dd').parse(listItems['date']);
+// var beginLessonH = DateFormat('H:mm').parse('11:00').hour;
+// var beginLessonm = DateFormat('H:mm').parse('14:00').minute;
+// print(beginLessonH);print(beginLessonm);
+// var bb = (((DateFormat('H:mm').parse('11:00').hour)/2.4+(DateFormat('H:mm').parse('14:00').minute)/60)*1.6).toInt();
 
         // endTime: DateFormat('y.MM.dd H:mm').parse(json['date'] +' '+ json['endLesson']),
 // List<DataItem> users2 = List<DataItem>.from(jsons.map<DataItem>((dynamic e) => DataItem.fromJson(e)));
@@ -89,6 +89,10 @@ var bb = (((DateFormat('H:mm').parse('11:00').hour)/2.4+(DateFormat('H:mm').pars
     //     return item
     //   },
     // ).toList();
- print(bb);
+
+
+var weekday = DateFormat('y.MM.dd').parse(DataTime.now);
+ print('2024.11.23');
+ print(weekday);
   }
 
