@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;// для работы с файл
-
+import 'package:intl/intl.dart';
 
 class Post {
   final int id;
@@ -49,7 +49,10 @@ class Post {
 
 class GroupListBody extends StatefulWidget {
   final String? thisselectedCategory;
-  const GroupListBody({super.key, required this.thisselectedCategory});
+   
+   GroupListBody({super.key, required this.thisselectedCategory,});
+  
+   
   @override
   State<GroupListBody> createState() => _GroupListBodyState();
 }
@@ -150,9 +153,10 @@ class _GroupListBodyState extends State<GroupListBody> {
         });
   }
   Future<List<Post>> fetchData() async {
+     String formattedDateNow = DateFormat('yyyy.MM.dd').format(DateTime.now());
     final response = await http.get(
       Uri.parse(
-          'https://ruz.fa.ru/api/schedule/group/${widget.thisselectedCategory}?start=2024.11.23&finish=2024.11.24'),
+          'https://ruz.fa.ru/api/schedule/group/${widget.thisselectedCategory}?start=$formattedDateNow&finish=$formattedDateNow'),
     );
     if (response.statusCode == 200) {
       final List jsonResponse = json.decode(response.body);
