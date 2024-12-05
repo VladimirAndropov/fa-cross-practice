@@ -28,13 +28,13 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: "23.x"
-          cache: 'gradle'
+          # cache: 'gradle'
 
       - uses: subosito/flutter-action@v1
         with:
           flutter-version: "3.24.5"
           channel: "stable"
-          cache: true
+          # cache: true
 
       - name: Get dependencies
         working-directory: ./2.flutter/furshed
