@@ -17,14 +17,27 @@ on:
      - ".vscode/**"
      - ".idea/"
      - "**/README.md"
+     - "README.md"
+     - ".github/**"
 
 
 jobs:
   build:
     runs-on: ubuntu-24.04
     steps:     
-      - uses: actions/checkout@v4
-
+      - uses: actions/checkout@v3
+      - name: Download Android keystore
+        id: android_keystore
+        uses: timheuer/base64-to-file@v1.0.3
+        with:
+          fileName: upload-keystore.jks
+          encodedString: ${{ secrets.KEYSTORE_BASE64 }}
+      - name: Create key.properties
+        run: |
+          echo "storeFile=${{ steps.android_keystore.outputs.filePath }}" > android/key.properties
+          echo "storePassword=${{ secrets.STORE_PASSWORD }}" >> android/key.properties
+          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/key.properties
+          echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> android/key.properties
       - uses: actions/setup-java@v1
         with:
           java-version: "17.x"
@@ -49,3 +62,9 @@ jobs:
       - name: Run build apk
         working-directory: ./2.flutter/furshed
         run: flutter build apk --release
+      - name: Upload Android Release
+        # working-directory: ./2.flutter/furshed
+        uses: actions/upload-artifact@v1
+        with:
+          name: APK
+          path: build/app/outputs/apk/dev/debug/apk_name.apk
