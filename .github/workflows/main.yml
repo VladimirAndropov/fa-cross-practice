@@ -64,7 +64,7 @@ jobs:
         run: flutter build apk --release
       - name: Upload Android Release
         # working-directory: ./2.flutter/furshed
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         with:
           name: APK
           path: build/app/outputs/apk/dev/debug/apk_name.apk
