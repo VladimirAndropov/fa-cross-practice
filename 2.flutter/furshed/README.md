@@ -45,3 +45,5 @@
 Потренируйтесь с роутами - 2.flutter/go_router_example
 
 Удачи!
+
+builds: https://github.com/VladimirAndropov/fa-cross-practice/releases
