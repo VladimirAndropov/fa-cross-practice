@@ -28,7 +28,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Create key.properties
         run: |
-          echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 -d > ./keystore.jks
+          echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 -d > /home/runner/keystore.jks
       - uses: actions/setup-java@v1
         with:
           java-version: "17.x"
@@ -57,7 +57,7 @@ jobs:
           STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-          STORE_FILE: "../../keystore.jks"
+          STORE_FILE: "/home/runner/keystore.jks"
       - name: Upload Android Release
         # working-directory: ./2.flutter/furshed
         uses: actions/upload-artifact@v4
