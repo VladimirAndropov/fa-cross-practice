@@ -58,7 +58,7 @@ jobs:
 
       - name: Run build apk
         working-directory: ./2.flutter/furshed
-        run: flutter build apk --release --verbose
+        run: flutter build apk --release
         env:
           STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
@@ -92,8 +92,8 @@ jobs:
         with:
           name: release-artifacts
           path: "/home/runner/work/fa-cross-practice/fa-cross-practice/2.flutter/furshed/build/app/outputs/flutter-apk/app-release.apk"     
-      # - name: Create Github Release
-      #   uses: softprops/action-gh-release@v1
-      #   with:
-      #     tag_name: release
-      #     files: "build/app/outputs/flutter-apk/app-release.apk"
+      - name: Create Github Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: release
+          files: "/home/runner/work/fa-cross-practice/fa-cross-practice/2.flutter/furshed/build/app/outputs/flutter-apk/app-release.apk"
