@@ -65,8 +65,9 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: release-artifacts
-          path: "app/build/outputs/apk/release/"     
+          path: "build/app/outputs/flutter-apk/app-release.apk"     
       - name: Create Github Release
         uses: softprops/action-gh-release@v1
         with:
-          files: "app/build/outputs/apk/release/app-release.apk"
+          tag_name: release
+          files: "build/app/outputs/flutter-apk/app-release.apk"
