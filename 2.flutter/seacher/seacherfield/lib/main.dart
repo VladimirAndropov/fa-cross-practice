@@ -1,103 +1,95 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 
-import 'debounced_search_bar.dart';
-import 'itunes_item.dart';
+/// Flutter code sample for [SearchAnchor].
 
-void main() {
-  runApp(const MyApp());
-}
+const Duration fakeAPIDuration = Duration(seconds: 1);
 
-Future<Iterable<ITunesItem>> searchITunes(String query) async {
-  if (query.isEmpty) {
-    return <ITunesItem>[];
-  }
+void main() => runApp(const SearchAnchorAsyncExampleApp());
 
-  final response = await http.get(
-    Uri.parse('https://itunes.apple.com/search?term=$query&media=music&limit=10'),
-  );
+class SearchAnchorAsyncExampleApp extends StatelessWidget {
+  const SearchAnchorAsyncExampleApp({super.key});
 
-  try {
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      final results = List<Map<String, dynamic>>.from(data['results']);
-      return results.map((result) => ITunesItem.fromJson(result)).toList();
-    } else {
-      throw Exception('Error searching iTunes: ${response.statusCode} ${response.reasonPhrase}');
-    }
-  } catch (error) {
-    print(error);
-    return <ITunesItem>[];
-  }
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Debounced Search Bar',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('SearchAnchor - async'),
+        ),
+        body: const Center(
+          child: _AsyncSearchAnchor(),
+        ),
       ),
-      home: const MyHomePage(title: 'Flutter Debounced Search Bar'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
+class _AsyncSearchAnchor extends StatefulWidget {
+  const _AsyncSearchAnchor();
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<_AsyncSearchAnchor> createState() => _AsyncSearchAnchorState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  ITunesItem? _selectedITunesItem;
+class _AsyncSearchAnchorState extends State<_AsyncSearchAnchor> {
+  // The query currently being searched for. If null, there is no pending
+  // request.
+  String? _searchingWithQuery;
+
+  // The most recent options received from the API.
+  late Iterable<Widget> _lastOptions = <Widget>[];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            DebouncedSearchBar<ITunesItem>(
-              hintText: 'Search iTunes for music',
-              onResultSelected: (ITunesItem result) {
-                setState(() {
-                  _selectedITunesItem = result;
-                });
-              },
-              resultToString: (ITunesItem result) => result.trackName,
-              resultTitleBuilder: (ITunesItem result) => Text(result.trackName),
-              resultSubtitleBuilder: (ITunesItem result) => Text(result.artistName),
-              resultLeadingBuilder: (ITunesItem result) => result.artworkUrl30 != null
-                  ? Image.network(result.artworkUrl30!)
-                  : const Icon(Icons.music_note),
-              searchFunction: searchITunes,
-            ),
-            if (_selectedITunesItem != null) ...[
-              const SizedBox(height: 16),
-              Text(_selectedITunesItem!.trackName, style: Theme.of(context).textTheme.titleLarge),
-              Text(_selectedITunesItem!.artistName, style: Theme.of(context).textTheme.titleSmall),
-              if (_selectedITunesItem!.artworkUrl100 != null) ...[
-                const SizedBox(height: 16),
-                Image.network(_selectedITunesItem!.artworkUrl100!),
-              ],
-            ],
-          ],
-        ),
-      ),
-    );
+    return SearchAnchor(
+        builder: (BuildContext context, SearchController controller) {
+      return IconButton(
+        icon: const Icon(Icons.search),
+        onPressed: () {
+          controller.openView();
+        },
+      );
+    }, suggestionsBuilder:
+            (BuildContext context, SearchController controller) async {
+      _searchingWithQuery = controller.text;
+      final List<String> options =
+          (await _FakeAPI.search(_searchingWithQuery!)).toList();
+
+      // If another search happened after this one, throw away these options.
+      // Use the previous options instead and wait for the newer request to
+      // finish.
+      if (_searchingWithQuery != controller.text) {
+        return _lastOptions;
+      }
+
+      _lastOptions = List<ListTile>.generate(options.length, (int index) {
+        final String item = options[index];
+        return ListTile(
+          title: Text(item),
+        );
+      });
+
+      return _lastOptions;
+    });
+  }
+}
+
+// Mimics a remote API.
+class _FakeAPI {
+  static const List<String> _kOptions = <String>[
+    'aardvark',
+    'bobcat',
+    'chameleon',
+  ];
+
+  // Searches the options, but injects a fake "network" delay.
+  static Future<Iterable<String>> search(String query) async {
+    await Future<void>.delayed(fakeAPIDuration); // Fake 1 second delay.
+    if (query == '') {
+      return const Iterable<String>.empty();
+    }
+    return _kOptions.where((String option) {
+      return option.contains(query.toLowerCase());
+    });
   }
 }
