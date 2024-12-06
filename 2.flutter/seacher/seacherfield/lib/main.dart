@@ -2,68 +2,57 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-import 'debounced_search_bar.dart';
+import '../debounced_search_bar.dart';
 
 
 void main() {
   runApp(const MyApp());
 }
 
-class ITunesItem {
-  String wrapperType;
-  String kind;
-  String trackName;
-  String artistName;
-  String collectionName;
-  String? artworkUrl30;
-  String? artworkUrl60;
-  String? artworkUrl100;
+class Prepods {
+    String id;
+    String label;
+    String description;
 
-  ITunesItem({
-    required this.wrapperType,
-    required this.kind,
-    required this.trackName,
-    required this.artistName,
-    required this.collectionName,
-    this.artworkUrl30,
-    this.artworkUrl60,
-    this.artworkUrl100,
+  Prepods({
+    required this.id, 
+  required this.label, 
+  required this.description
   });
 
-  factory ITunesItem.fromJson(Map<String, dynamic> json) {
-    return ITunesItem(
-      wrapperType: json['wrapperType'] as String,
-      kind: json['kind'] as String,
-      trackName: json['trackName'] as String,
-      artistName: json['artistName'] as String,
-      collectionName: json['collectionName'] as String,
-      artworkUrl30: json['artworkUrl30'] as String?,
-      artworkUrl60: json['artworkUrl60'] as String?,
-      artworkUrl100: json['artworkUrl100'] as String?,
-    );
+  factory Prepods.fromJson(Map<String, dynamic> json) {
+    return Prepods(
+        id: (json['id'] as String?) ?? '',
+        label: (json['label'] as String?) ?? '',
+        description: (json['description'] as String?) ?? ''
+        );
   }
 }
 
-Future<Iterable<ITunesItem>> searchITunes(String query) async {
+Future<Iterable<Prepods>> search(String query) async {
   if (query.isEmpty) {
-    return <ITunesItem>[];
+    return <Prepods>[];
   }
 
   final response = await http.get(
-    Uri.parse('https://itunes.apple.com/search?term=$query&media=music&limit=10'),
+    Uri.parse('https://ruz.fa.ru/api/search?type=person&term=$query'),
   );
 
   try {
     if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      final results = List<Map<String, dynamic>>.from(data['results']);
-      return results.map((result) => ITunesItem.fromJson(result)).toList();
+      final List<dynamic> data = jsonDecode(response.body);
+      // final results = List<Map<String, dynamic>>.from(data['results']);
+      // print(results);
+      var temp = List<Prepods>.from(data.map<Prepods>((dynamic e) => Prepods.fromJson(e)));
+      // var temp = results.map((result) => Prepods.fromJson(result)).toList();
+      print(temp);
+      return temp;
     } else {
-      throw Exception('Error searching iTunes: ${response.statusCode} ${response.reasonPhrase}');
+      throw Exception('Error searching prepods: ${response.statusCode} ${response.reasonPhrase}');
     }
   } catch (error) {
     print(error);
-    return <ITunesItem>[];
+    return <Prepods>[];
   }
 }
 
@@ -93,7 +82,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  ITunesItem? _selectedITunesItem;
+  Prepods? _selectedITunesItem;
 
   @override
   Widget build(BuildContext context) {
@@ -106,29 +95,24 @@ class _MyHomePageState extends State<MyHomePage> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            DebouncedSearchBar<ITunesItem>(
-              hintText: 'Search iTunes for music',
-              onResultSelected: (ITunesItem result) {
+            DebouncedSearchBar<Prepods>(
+              hintText: 'Наберите русскими буквами фамилию преподавателя',
+              onResultSelected: (Prepods result) {
                 setState(() {
                   _selectedITunesItem = result;
                 });
               },
-              resultToString: (ITunesItem result) => result.trackName,
-              resultTitleBuilder: (ITunesItem result) => Text(result.trackName),
-              resultSubtitleBuilder: (ITunesItem result) => Text(result.artistName),
-              resultLeadingBuilder: (ITunesItem result) => result.artworkUrl30 != null
-                  ? Image.network(result.artworkUrl30!)
-                  : const Icon(Icons.music_note),
-              searchFunction: searchITunes,
+              resultToString: (Prepods result) => result.label,
+              resultTitleBuilder: (Prepods result) => Text(result.label),
+              resultSubtitleBuilder: (Prepods result) => Text(result.description),
+              resultLeadingBuilder: (Prepods result) => Text(result.id),
+              searchFunction: search,
             ),
             if (_selectedITunesItem != null) ...[
               const SizedBox(height: 16),
-              Text(_selectedITunesItem!.trackName, style: Theme.of(context).textTheme.titleLarge),
-              Text(_selectedITunesItem!.artistName, style: Theme.of(context).textTheme.titleSmall),
-              if (_selectedITunesItem!.artworkUrl100 != null) ...[
-                const SizedBox(height: 16),
-                Image.network(_selectedITunesItem!.artworkUrl100!),
-              ],
+              Text(_selectedITunesItem!.id, style: Theme.of(context).textTheme.titleLarge),
+              Text(_selectedITunesItem!.label, style: Theme.of(context).textTheme.titleSmall),
+              Text(_selectedITunesItem!.description, style: Theme.of(context).textTheme.titleSmall),
             ],
           ],
         ),

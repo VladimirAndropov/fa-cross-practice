@@ -88,6 +88,7 @@ class DebouncedSearchBarState<T> extends State<DebouncedSearchBar<T>> {
 
     try {
       final results = await widget.searchFunction(query);
+      print(results);
       return results;
     } catch (error) {
       return <T>[];
