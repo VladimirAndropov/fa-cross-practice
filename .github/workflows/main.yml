@@ -50,7 +50,7 @@ jobs:
       - name: Create keystore.jks
         working-directory: ./2.flutter/furshed
         run: |
-          echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 -d > android/app/upload-keystore.jks
+          echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 -d > /home/runner/upload-keystore.jks
 
       - name: Run build apk
         working-directory: ./2.flutter/furshed
@@ -59,10 +59,14 @@ jobs:
           STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-          STORE_FILE: "android/app/upload-keystore.jks"
-      - name: Upload Android Release
-        # working-directory: ./2.flutter/furshed
-        uses: actions/upload-artifact@v4
+          STORE_FILE: "/home/runner/upload-keystore.jks"
+        
+      - name: Upload Release Build to Artifacts
+        uses: actions/upload-artifact@v3
         with:
-          name: APK
-          path: build/app/outputs/apk/dev/debug/apk_name.apk
+          name: release-artifacts
+          path: "app/build/outputs/apk/release/"     
+      - name: Create Github Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: "app/build/outputs/apk/release/app-release.apk"
