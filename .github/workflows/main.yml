@@ -54,7 +54,7 @@ jobs:
 
       - name: Run build apk
         working-directory: ./2.flutter/furshed
-        run: flutter build apk --release
+        run: flutter build apk --release --verbose
         env:
           STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
@@ -62,7 +62,7 @@ jobs:
           STORE_FILE: "/home/runner/upload-keystore.jks"
       - name: Display the path
         run: |
-            echo ${PATH}
+            echo ${PROJECT FOLDER PATH}
             git tag 0.0.1
             echo "wow"
         shell: bash
@@ -87,7 +87,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: release-artifacts
-          path: "build/app/outputs/flutter-apk/app-release.apk"     
+          path: "/home/runner/work/fa-cross-practice/fa-cross-practice/2.flutter/furshed/build/app/outputs/flutter-apk/app-release.apk"     
       # - name: Create Github Release
       #   uses: softprops/action-gh-release@v1
       #   with:
