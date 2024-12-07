@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
+import 'package:flutter/services.dart' show rootBundle;
 import '../debounced_search_bar.dart';
 
 
@@ -37,7 +37,6 @@ Future<Iterable<Prepods>> search(String query) async {
   final response = await http.get(
     Uri.parse('https://ruz.fa.ru/api/search?type=person&term=$query'),
   );
-
   try {
     if (response.statusCode == 200) {
       final List<dynamic> data = jsonDecode(response.body);
@@ -55,6 +54,34 @@ Future<Iterable<Prepods>> search(String query) async {
     return <Prepods>[];
   }
 }
+
+
+// Future<Iterable<Prepods>> search(String query) async {
+//   if (query.isEmpty) {
+//     print('empty');
+//     return <Prepods>[];
+//   }
+
+//   String response = await rootBundle.loadString('assets/prepods.json');
+
+//   try {
+//     if (response != '') {
+//       final List<dynamic> data = jsonDecode(response);
+//       // final results = List<Map<String, dynamic>>.from(data['results']);
+//       // print(results);
+//       var temp = List<Prepods>.from(data.map<Prepods>((dynamic e) => Prepods.fromJson(e)));
+//       // var temp = results.map((result) => Prepods.fromJson(result)).toList();
+//       print('temp = $temp');
+//       return temp;
+//     } else {
+//       throw Exception('Error searching prepods: ${response}');
+//     }
+//   } catch (error) {
+//     print('error $error');
+//     return <Prepods>[];
+//   }
+// }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -104,15 +131,15 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               resultToString: (Prepods result) => result.label,
               resultTitleBuilder: (Prepods result) => Text(result.label),
-              resultSubtitleBuilder: (Prepods result) => Text(result.description),
-              resultLeadingBuilder: (Prepods result) => Text(result.id),
+              // resultSubtitleBuilder: (Prepods result) => Text(result.description),
+              // resultLeadingBuilder: (Prepods result) => Text(result.id),
               searchFunction: search,
             ),
             if (_selectedITunesItem != null) ...[
               const SizedBox(height: 16),
-              Text(_selectedITunesItem!.id, style: Theme.of(context).textTheme.titleLarge),
-              Text(_selectedITunesItem!.label, style: Theme.of(context).textTheme.titleSmall),
-              Text(_selectedITunesItem!.description, style: Theme.of(context).textTheme.titleSmall),
+              Text(_selectedITunesItem!.id, style: Theme.of(context).textTheme.titleSmall),
+              Text(_selectedITunesItem!.label, style: Theme.of(context).textTheme.titleLarge),
+              Text(_selectedITunesItem!.description, style: Theme.of(context).textTheme.titleLarge),
             ],
           ],
         ),

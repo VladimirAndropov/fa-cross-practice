@@ -20,6 +20,7 @@ dependencies:
   # provider: ^6.1.2
   time_scheduler_table:
     path: ../time_scheduler_table/
+  rxdart: ^0.28.0
 
 dev_dependencies:
   flutter_test:
