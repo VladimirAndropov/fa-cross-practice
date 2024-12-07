@@ -33,6 +33,7 @@ Future<Iterable<Prepods>> search(String query) async {
   if (query.isEmpty) {
     return <Prepods>[];
   }
+// final response = await Dio().get('https://ruz.fa.ru/api/search?type=person&term=$query');
 
   final response = await http.get(
     Uri.parse('https://ruz.fa.ru/api/search?type=person&term=$query'),
@@ -56,31 +57,6 @@ Future<Iterable<Prepods>> search(String query) async {
 }
 
 
-// Future<Iterable<Prepods>> search(String query) async {
-//   if (query.isEmpty) {
-//     print('empty');
-//     return <Prepods>[];
-//   }
-
-//   String response = await rootBundle.loadString('assets/prepods.json');
-
-//   try {
-//     if (response != '') {
-//       final List<dynamic> data = jsonDecode(response);
-//       // final results = List<Map<String, dynamic>>.from(data['results']);
-//       // print(results);
-//       var temp = List<Prepods>.from(data.map<Prepods>((dynamic e) => Prepods.fromJson(e)));
-//       // var temp = results.map((result) => Prepods.fromJson(result)).toList();
-//       print('temp = $temp');
-//       return temp;
-//     } else {
-//       throw Exception('Error searching prepods: ${response}');
-//     }
-//   } catch (error) {
-//     print('error $error');
-//     return <Prepods>[];
-//   }
-// }
 
 
 class MyApp extends StatelessWidget {

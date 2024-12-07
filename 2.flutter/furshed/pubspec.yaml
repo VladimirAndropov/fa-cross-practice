@@ -14,13 +14,14 @@ dependencies:
   go_router: ^8.2.0
 
   cupertino_icons: ^1.0.2
-  http: ^1.2.2
+  dio: ^5.7.0
   intl: ^0.19.0
   # loadmore_listview: ^1.0.7
   # provider: ^6.1.2
   time_scheduler_table:
     path: ../time_scheduler_table/
-  rxdart: ^0.28.0
+  http: ^1.2.2
+
 
 dev_dependencies:
   flutter_test:

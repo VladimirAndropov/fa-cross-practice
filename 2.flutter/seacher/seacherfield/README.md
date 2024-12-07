@@ -1,3 +1,5 @@
 # seacherfield
 
-A new Flutter project.
+Продвинутый пример
+Возьмите лучше APPbar - он попроще и разделен на APPбар - для поиска и body - для результатов
+

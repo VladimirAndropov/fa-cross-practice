@@ -1,30 +1,45 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
+
 import 'package:go_router/go_router.dart';
-import 'package:flutter/services.dart' show rootBundle;
-import 'package:http/http.dart' as http;
-import 'debounced_search_bar.dart';
+
+import 'package:dio/dio.dart';
+
 import 'group_list_body.dart';
 import 'sheduling_calendar.dart';
 
 
 class Prepods {
-    String id;
-    String label;
-    String description;
+  String id;
+  String label;
+  String description;
 
-  Prepods({
-    required this.id, 
-  required this.label, 
-  required this.description
-  });
+  Prepods({required this.id, required this.label, required this.description});
 
   factory Prepods.fromJson(Map<String, dynamic> json) {
     return Prepods(
         id: (json['id'] as String?) ?? '',
         label: (json['label'] as String?) ?? '',
-        description: (json['description'] as String?) ?? ''
-        );
+        description: (json['description'] as String?) ?? '');
+  }
+
+  static Future<Iterable<Prepods>> search(String query) async {
+    if (query.isEmpty) {
+      return <Prepods>[];
+    }
+    final response =
+        await Dio().get('https://ruz.fa.ru/api/search?type=person&term=$query');
+
+    try {
+      if (response.statusCode == 200) {
+        final List<dynamic> data = List<dynamic>.from(response.data);
+        return List<Prepods>.from(
+            data.map<Prepods>((dynamic e) => Prepods.fromJson(e)));
+      } else {
+        throw Exception('Error searching prepods: ${response.statusCode} ');
+      }
+    } catch (error) {
+      return <Prepods>[];
+    }
   }
 }
 
@@ -62,141 +77,96 @@ class PrepodsListBody extends StatefulWidget {
 }
 
 class _PrepodsListBodyState extends State<PrepodsListBody> {
-   Prepods? _selectedITunesItem;
+  Prepods? _selectedIItem;
+  String? _searchingWithQuery;
+  String? selectedresult;
+  bool _isLoading = false;
+  late Iterable<Widget> _lastresults = <Widget>[];
 
   @override
-  Widget build(BuildContext context) {
-    return  Column(
-          children: [
-            DebouncedSearchBar<Prepods>(
-              hintText: 'Наберите русскими буквами фамилию преподавателя',
-              onResultSelected:
-              
-               (Prepods result) {
-                setState(() {
-                  _selectedITunesItem = result;
-                });
-              },
-              resultToString: (Prepods result) => result.label,
-              resultTitleBuilder: (Prepods result) => Text(result.label),
-              // resultSubtitleBuilder: (Prepods result) => Text(result.description),
-              // resultLeadingBuilder: (Prepods result) => Text(result.id),
-              searchFunction: search,
-          
+  void initState() {
+    super.initState();
+    setState(() {
+      _isLoading = true;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Colors.deepPurple, Colors.purple.shade300],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
             ),
-            if (_selectedITunesItem != null) ...[
-              const SizedBox(height: 16),
-              Text(_selectedITunesItem!.label, style: Theme.of(context).textTheme.titleSmall),
-              // ShedulingCalendar(id: _selectedITunesItem!.id),
-              // GroupListBody(thisselectedCategory: _selectedITunesItem!.id)
-            ],
-            GroupListBody(thisselectedCategory: "144421")
-          ],
-        );
-  }
+          ),
+          title: SearchAnchor(
+            builder: (BuildContext context, SearchController controller) {
+              return SearchBar(
+                controller: controller,
+                padding: const MaterialStatePropertyAll<EdgeInsets>(
+                    EdgeInsets.symmetric(horizontal: 16.0)),
+                onTap: () {
+                  controller.openView();
+                },
+                leading: const Icon(Icons.search),
+                hintText: 'Наберите русскими буквами фамилию преподавателя',
+              );
+            },
+            suggestionsBuilder:
+                (BuildContext context, SearchController controller) async {
+              _searchingWithQuery = controller.text;
+              final results =
+                  (await Prepods.search(_searchingWithQuery!)).toList();
+              if (_searchingWithQuery != controller.text) {
+                return <Widget>[]; //Prepods item = results[index];
+              }
 
+              _lastresults =
+                  List<ListTile>.generate(results.length, (int index) {
+                return ListTile(
+                  title: Text(results[index].label),
+                  onTap: 
+                  // () {
+                  //   setState(() {
+                  //     _isLoading = false;
+                  //     _selectedIItem = results[index];
+                  //   });
+                  //   controller.closeView(selectedresult);
+                  // },
+                   () => context.goNamed("ShedulingCalendar", pathParameters: {'id': results[index].id.toString()}),
 
-  // Widget build(BuildContext context) {
-  //   return FutureBuilder<List<DataItem>>(
-  //       future: fetchData(),
-  //       builder: (context, snapshot) {
-  //         if (snapshot.hasData) {
-  //         return ListView.builder(
-  //             itemCount: snapshot.data!.length,
-  //             itemBuilder: (context, index) {
-  //               return GestureDetector(
-  //     onTap: 
-  //         () => context.goNamed("ShedulingCalendar", pathParameters: {'id': snapshot.data![index].id}),
-  //     child: Card(
-  //                 margin: const EdgeInsets.symmetric(vertical: 10),
-  //                 shape: RoundedRectangleBorder(
-  //                   borderRadius: BorderRadius.circular(12),
-  //                 ),
-  //                 elevation: 4,
-  //                 child: Padding(
-  //                   padding: const EdgeInsets.all(15.0),
-  //                   child: Column(
-  //                     crossAxisAlignment: CrossAxisAlignment.start,
-  //                     children: [
-  //                       Text(
-  //                         snapshot.data![index].label,
-  //                         style: const TextStyle(
-  //                             fontSize: 16, fontWeight: FontWeight.bold),
-  //                         overflow: TextOverflow.ellipsis,
-  //                         softWrap: true,
-  //                         maxLines: 3,
-  //                       ),
-  //                       const SizedBox(height: 8),
-  //                       Row(
-  //                         crossAxisAlignment: CrossAxisAlignment.start,
-  //                         children: [
-  //                           const SizedBox(
-  //                               height: 100,
-  //                               width: 100,
-  //                               child: Icon(Icons.image,
-  //                                   size:
-  //                                       50)), // Заглушка, если нет изображения
-  //                           const SizedBox(width: 16),
-  //                           Expanded(
-  //                             child: Column(
-  //                               crossAxisAlignment: CrossAxisAlignment.start,
-  //                               children: [
-  //                                 Text(
-  //                                   snapshot.data![index].description,
-  //                                   style:
-  //                                       const TextStyle(color: Colors.black87),
-  //                                   maxLines: 4,
-  //                                   overflow: TextOverflow.ellipsis,
-  //                                 ),
-  //                                 const SizedBox(height: 8),
-  //                                 Text(
-  //                                   snapshot.data![index].id,
-  //                                   style: const TextStyle(
-  //                                       color: Colors.black54, fontSize: 12),
-  //                                 ),
-  //                               ],
-  //                             ),
-  //                           ),
-  //                         ],
-  //                       ),
-  //                     ],
-  //                   ),
-  //                 ),
-  //               )
-  //               );
-  //             });
-  //       } else if (snapshot.hasError) {
-  //         return Text(snapshot.error.toString());
-  //       }
-  //       // By default show a loading spinner.
-  //       return const CircularProgressIndicator();
-  //       });
-  }
-Future<Iterable<Prepods>> search(String query) async {
-  if (query.isEmpty) {
-    return <Prepods>[];
-  }
+                );
+              });
 
-  final response = await http.get(
-    Uri.parse('https://ruz.fa.ru/api/search?type=group&term=$query'),
-  );
-  try {
-    if (response.statusCode == 200) {
-      final List<dynamic> data = jsonDecode(response.body);
-      // final results = List<Map<String, dynamic>>.from(data['results']);
-      // print(results);
-      var temp = List<Prepods>.from(data.map<Prepods>((dynamic e) => Prepods.fromJson(e)));
-      // var temp = results.map((result) => Prepods.fromJson(result)).toList();
-      print(temp);
-      return temp;
-    } else {
-      throw Exception('Error searching prepods: ${response.statusCode} ${response.reasonPhrase}');
-    }
-  } catch (error) {
-    print(error);
-    return <Prepods>[];
-  }
-  
+              return _lastresults;
+            },
+          ),
+        ),
+        body: _isLoading
+            ? const Center(
+                child: CircularProgressIndicator(color: Colors.white),
+              )
+            : ListView.builder(
+                itemCount: 1,
+                itemBuilder: (context, index) => ListTile(
+                  title: Text(
+                    _selectedIItem!.label,
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                  subtitle: Text(
+                    _selectedIItem!.description,
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                  leading: Text(
+                    _selectedIItem!.id,
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+        backgroundColor: Colors.deepPurple.shade900,
+      );
 }
-
-  
