@@ -1,0 +1,366 @@
+{
+	"info": {
+		"_postman_id": "84cb695a-d49b-4b1a-bb0d-a352ddcae566",
+		"name": "ruz.fa.ru",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25206304"
+	},
+	"item": [
+		{
+			"name": "https://ruz.fa.ru/api/search?term=Андропов&type=person",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://ruz.fa.ru/api/search?term=Андропов&type=person",
+					"protocol": "https",
+					"host": [
+						"ruz",
+						"fa",
+						"ru"
+					],
+					"path": [
+						"api",
+						"search"
+					],
+					"query": [
+						{
+							"key": "term",
+							"value": "Андропов"
+						},
+						{
+							"key": "type",
+							"value": "person"
+						},
+						{
+							"key": "data",
+							"value": "hi",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "https://ruz.fa.ru/api/search?term=Андропов&type=person",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://ruz.fa.ru/api/search?type=person&term=А",
+							"protocol": "https",
+							"host": [
+								"ruz",
+								"fa",
+								"ru"
+							],
+							"path": [
+								"api",
+								"search"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "person"
+								},
+								{
+									"key": "data",
+									"value": "hi",
+									"disabled": true
+								},
+								{
+									"key": "term",
+									"value": "А"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 14 Nov 2024 11:37:50 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.6 (CentOS) OpenSSL/1.0.2k-fips mod_fcgid/2.3.9 PHP/5.4.16"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/5.4.16"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0"
+						},
+						{
+							"key": "Expires",
+							"value": "Thu, 19 Nov 1981 08:52:00 GMT"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "PHPSESSID=pis65bajti63g38kv10ikc3c10; path=/"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2772"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": \"-2\",\n        \"label\": \"1\",\n        \"description\": \"Кафедра бизнес-информатики\",\n        \"type\": \"person\"\n    },\n    {\n        \"id\": \"df1ef977-af94-11ee-9525-005056bf7de8\",\n        \"label\": \"Ду Хуэй\",\n        \"description\": \"Кафедра иностранных языков и межкультурной коммуникации\",\n        \"type\": \"person\"\n    },\n    {\n        \"id\": \"-182\",\n        \"label\": \"ИЖК_вак\",\n        \"description\": \"Базовая кафедра Ипотечное жилищное кредитование и финансовые инструменты рынка недвижимости\",\n        \"type\": \"person\"\n    },\n    {\n        \"id\": \"-194\",\n        \"label\": \"КОР_вак\",\n        \"description\": \"Кафедра отраслевых рынков\",\n        \"type\": \"person\"\n    },\n    {\n        \"id\": \"7e92b5a3-98bb-11ee-86b1-005056bf5929\",\n        \"label\": \"Юй Лань\",\n        \"description\": \"Кафедра политологии\",\n        \"type\": \"person\"\n    },\n    {\n        \"id\": \"-1\",\n        \"label\": \"!Вакансия\",\n        \"description\": \"!Не определена\",\n        \"type\": \"person\"\n    },\n    {\n        \"id\": \"fdfaf62b-04fc-11ee-be7b-005056bf7de8\",\n        \"label\": \"Али Бушра\",\n        \"description\": \"Кафедра искусственного интеллекта\",\n        \"type\": \"person\"\n    },\n    {\n        \"id\": \"da844020-160c-11ec-897b-005056bf7de8\",\n        \"label\": \"Ахмад Авс\",\n        \"description\": \"Кафедра искусственного интеллекта\",\n        \"type\": \"person\"\n    },\n    {\n        \"id\": \"-197\",\n        \"label\": \"КСиИР_вак\",\n        \"description\": \"Кафедра стратегического и инновационного развития\",\n        \"type\": \"person\"\n    },\n    {\n        \"id\": \"a0eedbfe-4639-11ed-a1ba-005056bf7de8\",\n        \"label\": \"Муса Ваэл\",\n        \"description\": \"Кафедра иностранных языков и межкультурной коммуникации\",\n        \"type\": \"person\"\n    },\n    {\n        \"id\": \"7e779035-a066-11ed-af13-005056bf5929\",\n        \"label\": \"Чжан Вэнь\",\n        \"description\": \"Кафедра иностранных языков и межкультурной коммуникации;Кафедра международного бизнеса\",\n        \"type\": \"person\"\n    },\n    {\n        \"id\": \"ae706b12-afb8-11ee-86b1-005056bf5929\",\n        \"label\": \"Ким Сучжон\",\n        \"description\": \"Кафедра психологии и развития человеческого капитала\",\n        \"type\": \"person\"\n    },\n    {\n        \"id\": \"0ca1ad12-2e96-11ed-84d4-005056bf5929\",\n        \"label\": \"Цой Гунвон\",\n        \"description\": \"Кафедра психологии и развития человеческого капитала\",\n        \"type\": \"person\"\n    },\n    {\n        \"id\": \"e766e2cf-80a6-11ef-b003-005056bf7de8\",\n        \"label\": \"Крепак Иван\",\n        \"description\": \"Кафедра информационной безопасности\",\n        \"type\": \"person\"\n    },\n    {\n        \"id\": \"3f166068-9bac-11ed-af13-005056bf5929\",\n        \"label\": \"Раджуб Гинд\",\n        \"description\": \"Кафедра английского языка и профессиональной коммуникации\",\n        \"type\": \"person\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "https://ruz.fa.ru/api/schedule/group/110929?start=2024.02.21&finish=2024.02.21",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://ruz.fa.ru/api/schedule/group/110929?start=2024.02.21&finish=2024.02.21",
+					"protocol": "https",
+					"host": [
+						"ruz",
+						"fa",
+						"ru"
+					],
+					"path": [
+						"api",
+						"schedule",
+						"group",
+						"110929"
+					],
+					"query": [
+						{
+							"key": "start",
+							"value": "2024.02.21"
+						},
+						{
+							"key": "finish",
+							"value": "2024.02.21"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://ruz.fa.ru/api/search?term=ПИ22-3&type=group",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://ruz.fa.ru/api/search?term=ПИ22-3&type=group",
+					"protocol": "https",
+					"host": [
+						"ruz",
+						"fa",
+						"ru"
+					],
+					"path": [
+						"api",
+						"search"
+					],
+					"query": [
+						{
+							"key": "term",
+							"value": "ПИ22-3"
+						},
+						{
+							"key": "type",
+							"value": "group"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://ruz.fa.ru/api/search?term=ауд.3310&type=auditorium",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://ruz.fa.ru/api/search?term=ауд.3310&type=auditorium",
+					"protocol": "https",
+					"host": [
+						"ruz",
+						"fa",
+						"ru"
+					],
+					"path": [
+						"api",
+						"search"
+					],
+					"query": [
+						{
+							"key": "term",
+							"value": "ауд.3310"
+						},
+						{
+							"key": "type",
+							"value": "auditorium"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://ruz.fa.ru/api/schedule/auditorium/2921?start=2024.02.21&finish=2024.02.21&lng=1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://ruz.fa.ru/api/schedule/auditorium/2921?start=2024.02.21&finish=2024.02.21&lng=1",
+					"protocol": "https",
+					"host": [
+						"ruz",
+						"fa",
+						"ru"
+					],
+					"path": [
+						"api",
+						"schedule",
+						"auditorium",
+						"2921"
+					],
+					"query": [
+						{
+							"key": "start",
+							"value": "2024.02.21"
+						},
+						{
+							"key": "finish",
+							"value": "2024.02.21"
+						},
+						{
+							"key": "lng",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://ruz.fa.ru/api/search?term=Вешняковский проезд&type=building",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://ruz.fa.ru/api/search?term=Вешняковский проезд&type=building",
+					"protocol": "https",
+					"host": [
+						"ruz",
+						"fa",
+						"ru"
+					],
+					"path": [
+						"api",
+						"search"
+					],
+					"query": [
+						{
+							"key": "term",
+							"value": "Вешняковский проезд"
+						},
+						{
+							"key": "type",
+							"value": "building"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://ruz.fa.ru/api/schedule/building/51?start=2024.02.21&finish=2024.02.21&lng=1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://ruz.fa.ru/api/schedule/building/51?start=2024.02.21&finish=2024.02.21&lng=1",
+					"protocol": "https",
+					"host": [
+						"ruz",
+						"fa",
+						"ru"
+					],
+					"path": [
+						"api",
+						"schedule",
+						"building",
+						"51"
+					],
+					"query": [
+						{
+							"key": "start",
+							"value": "2024.02.21"
+						},
+						{
+							"key": "finish",
+							"value": "2024.02.21"
+						},
+						{
+							"key": "lng",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://ruz.fa.ru/api/schedule/person/8487e5d1-d82e-11e8-b636-005056bf5929?start=2024.10.10&finish=2024.11.11",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://ruz.fa.ru/api/schedule/person/8487e5d1-d82e-11e8-b636-005056bf5929?start=2024.10.10&finish=2024.11.11",
+					"protocol": "https",
+					"host": [
+						"ruz",
+						"fa",
+						"ru"
+					],
+					"path": [
+						"api",
+						"schedule",
+						"person",
+						"8487e5d1-d82e-11e8-b636-005056bf5929"
+					],
+					"query": [
+						{
+							"key": "start",
+							"value": "2024.10.10"
+						},
+						{
+							"key": "finish",
+							"value": "2024.11.11"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
