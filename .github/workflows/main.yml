@@ -76,17 +76,7 @@ jobs:
       #         GITHUB_TAG = "0.0.1"
       #         git tag ${GITHUB_TAG}
       #         echo "Release Tag :   ${GITHUB_TAG}"
-      # - name: Release To Git
-      #   uses: softprops/action-gh-release@v1
-      #   with: 
-      #       body: "A new release"
-      #       files: build/app/outputs/apk/release/app-release.apk
-      #     env:
-      #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      # - uses: actions/upload-artifact@v1
-      #   with:
-      #     name: release-apk
-      #     path: build/app/outputs/apk/release/app-release.apk 
+      
       - name: Upload Release Build to Artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -95,6 +85,7 @@ jobs:
       - name: Create Github Release
         uses: softprops/action-gh-release@v1
         with:
+          body: "A new release"
           tag_name: release
           files: "/home/runner/work/fa-cross-practice/fa-cross-practice/2.flutter/furshed/build/app/outputs/flutter-apk/app-release.apk"
         env:
