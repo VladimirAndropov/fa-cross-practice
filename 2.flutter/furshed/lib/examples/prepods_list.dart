@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:go_router/go_router.dart';
-
+import 'package:flutter_switch/flutter_switch.dart';
 import 'package:dio/dio.dart';
 
+import 'package:intl/date_symbol_data_local.dart';
 import 'group_list_body.dart';
-import 'sheduling_calendar.dart';
-
 
 class Prepods {
   String id;
@@ -22,12 +20,12 @@ class Prepods {
         description: (json['description'] as String?) ?? '');
   }
 
-  static Future<Iterable<Prepods>> search(String query) async {
+  static Future<Iterable<Prepods>> search(String query, bool status) async {
     if (query.isEmpty) {
       return <Prepods>[];
     }
-    final response =
-        await Dio().get('https://ruz.fa.ru/api/search?type=person&term=$query');
+    final response = await Dio().get(
+        'https://ruz.fa.ru/api/search?type=${status ? "person" : "group"}&term=$query');
 
     try {
       if (response.statusCode == 200) {
@@ -43,13 +41,11 @@ class Prepods {
   }
 }
 
-
-
-
 class PrepodsList extends StatelessWidget {
+  const PrepodsList({
+    super.key,
+  });
 
-  const PrepodsList({super.key, });
-  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -57,12 +53,12 @@ class PrepodsList extends StatelessWidget {
             // key: _scaffoldKey,
             appBar: AppBar(
               title: const Text(
-                'Преподаватели',
+                'Расписание',
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Roboto',
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
               ),
             ),
@@ -80,15 +76,16 @@ class _PrepodsListBodyState extends State<PrepodsListBody> {
   Prepods? _selectedIItem;
   String? _searchingWithQuery;
   String? selectedresult;
-  bool _isLoading = false;
+  bool _isLoading = true;
+  bool status = false;
+  double start = 0;
+  double end = 0;
   late Iterable<Widget> _lastresults = <Widget>[];
 
   @override
   void initState() {
     super.initState();
-    setState(() {
-      _isLoading = true;
-    });
+        initializeDateFormatting('ru', null);
   }
 
   @override
@@ -97,15 +94,65 @@ class _PrepodsListBodyState extends State<PrepodsListBody> {
           flexibleSpace: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [Colors.deepPurple, Colors.purple.shade300],
+                colors: [Colors.grey.shade400, Colors.green.shade200],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
             ),
           ),
+          actions: [
+            RangeSlider( 
+              divisions: 10,
+
+            values: RangeValues(start, end), 
+            labels: RangeLabels(start.round().toString(), end.round().toString()), 
+            onChanged: (value) { 
+              setState(() { 
+                start = value.start; 
+                end = value.end; 
+              }); 
+            }, 
+            min: -14, 
+            max: 14, 
+          ), 
+
+            FlutterSwitch(
+              activeText: "Лектор",
+              inactiveText: "Группа",
+              inactiveColor: Colors.green,
+              value: status,
+              valueFontSize: 16.0,
+              width: 140,
+              height: 30,
+              borderRadius: 30.0,
+              showOnOff: true,
+              onToggle: (val) {
+                setState(() {
+                  status = val;
+                });
+              },
+            ),
+          ],
           title: SearchAnchor(
             builder: (BuildContext context, SearchController controller) {
               return SearchBar(
+                trailing: [
+                  IconButton(
+                    icon: const Icon(Icons.keyboard_voice),
+                    onPressed: () {
+                      print('Use voice command');
+                    },
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.camera_alt),
+                    onPressed: () {
+                      print('Use image search');
+                    },
+                  ),
+                ],
+                side: MaterialStateProperty.all(
+                    const BorderSide(color: Colors.black)),
+                overlayColor: MaterialStateProperty.all(Colors.grey.shade100),
                 controller: controller,
                 padding: const MaterialStatePropertyAll<EdgeInsets>(
                     EdgeInsets.symmetric(horizontal: 16.0)),
@@ -113,14 +160,16 @@ class _PrepodsListBodyState extends State<PrepodsListBody> {
                   controller.openView();
                 },
                 leading: const Icon(Icons.search),
-                hintText: 'Наберите русскими буквами фамилию преподавателя',
+                hintText: status
+                    ? 'Наберите русскими буквами фамилию преподавателя'
+                    : 'Наберите русскими буквами название группы',
               );
             },
             suggestionsBuilder:
                 (BuildContext context, SearchController controller) async {
               _searchingWithQuery = controller.text;
               final results =
-                  (await Prepods.search(_searchingWithQuery!)).toList();
+                  (await Prepods.search(_searchingWithQuery!, status)).toList();
               if (_searchingWithQuery != controller.text) {
                 return <Widget>[]; //Prepods item = results[index];
               }
@@ -129,16 +178,15 @@ class _PrepodsListBodyState extends State<PrepodsListBody> {
                   List<ListTile>.generate(results.length, (int index) {
                 return ListTile(
                   title: Text(results[index].label),
-                  onTap: 
-                  // () {
-                  //   setState(() {
-                  //     _isLoading = false;
-                  //     _selectedIItem = results[index];
-                  //   });
-                  //   controller.closeView(selectedresult);
-                  // },
-                   () => context.goNamed("ShedulingCalendar", pathParameters: {'id': results[index].id.toString()}),
-
+                  onTap: () {
+                    setState(() {
+                      _isLoading = false;
+                      _selectedIItem = results[index];
+                    });
+                    controller.closeView(selectedresult);
+                    controller.text = results[index].label;
+                  },
+                  //  () => context.goNamed("ShedulingCalendar", pathParameters: {'id': results[index].id.toString()}),
                 );
               });
 
@@ -148,25 +196,17 @@ class _PrepodsListBodyState extends State<PrepodsListBody> {
         ),
         body: _isLoading
             ? const Center(
-                child: CircularProgressIndicator(color: Colors.white),
-              )
-            : ListView.builder(
-                itemCount: 1,
-                itemBuilder: (context, index) => ListTile(
-                  title: Text(
-                    _selectedIItem!.label,
-                    style: const TextStyle(color: Colors.white),
-                  ),
-                  subtitle: Text(
-                    _selectedIItem!.description,
-                    style: const TextStyle(color: Colors.white),
-                  ),
-                  leading: Text(
-                    _selectedIItem!.id,
-                    style: const TextStyle(color: Colors.white),
-                  ),
+                child: Icon(
+                Icons.swipe_up_outlined,
+                color: Colors.black87,
+                size: 80,
+              ))
+            : GroupListBody(
+                thisselectedCategory: _selectedIItem!.id,
+                thisselectedstatus: status,
+                thisdatastart: start,
+                thisdataend: end
                 ),
-              ),
-        backgroundColor: Colors.deepPurple.shade900,
+        backgroundColor: Colors.green.shade100,
       );
 }

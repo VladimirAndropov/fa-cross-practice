@@ -21,6 +21,8 @@ dependencies:
   time_scheduler_table:
     path: ../time_scheduler_table/
   http: ^1.2.2
+  flutter_switch: ^0.3.2
+  toggle_switch: ^2.3.0
 
 
 dev_dependencies:
