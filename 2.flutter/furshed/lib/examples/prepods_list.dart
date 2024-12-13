@@ -92,22 +92,14 @@ class _PrepodsListBodyState extends State<PrepodsListBody> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    floatingActionButton: FlutterSwitch(
-              activeText: "Список",
-              inactiveText: "Календарь",
-              inactiveColor: const Color.fromARGB(255, 102, 98, 156),
-              value: calendar,
-              valueFontSize: 16.0,
-              width: 140,
-              height: 30,
-              borderRadius: 30.0,
-              showOnOff: true,
-              onToggle: (val) {
-                setState(() {
-                  calendar = val;
-                });
-              },
-            ),
+    floatingActionButton: FloatingActionButton(
+        onPressed:   () {
+                    setState(() {
+                      calendar = !calendar;
+                    });},
+        tooltip: 'Календарь-Список',
+        child: const Icon(Icons.calendar_month_outlined),
+      ), 
         appBar: AppBar(
           flexibleSpace: Container(
             decoration: BoxDecoration(
