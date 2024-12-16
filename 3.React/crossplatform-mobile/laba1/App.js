@@ -1,352 +1,150 @@
 import React, { useState, useEffect } from 'react';
-import {
-  View,
-  Text,
-  FlatList,
-  TouchableOpacity,
-  StyleSheet,
-  TextInput,
-  BackHandler,
-  Share,
-} from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
+import { Accelerometer } from 'expo-sensors';
+import * as WebBrowser from 'expo-web-browser';
+import { Video } from 'expo-av';
+import { Camera,CameraView } from 'expo-camera';
 
 const App = () => {
-  const [selectedContact, setSelectedContact] = useState(null);
-  const [screenStack, setScreenStack] = useState(['contacts']); // Стек экранов
-  const [messages, setMessages] = useState({}); // Хранилище сообщений для каждого контакта
-  const [currentMessage, setCurrentMessage] = useState('');
+  const [data, setData] = useState({});
+  const [subscription, setSubscription] = useState(null);
+  const [hasPermission, setHasPermission] = useState(null);
+  const [cameraVisible, setCameraVisible] = useState(false);
 
-  const contacts = [
-    { id: '1', name: 'Иван Иванов', phone: '+123456789' },
-    { id: '2', name: 'Мария Смирнова', phone: '+987654321' },
-    { id: '3', name: 'Петр Петров', phone: '+192837465' },
-  ];
-
-  const currentScreen = screenStack[screenStack.length - 1];
-
+  // Акселерометр
   useEffect(() => {
-    const handleBackPress = () => {
-      if (screenStack.length > 1) {
-        const newStack = [...screenStack];
-        newStack.pop();
-        setScreenStack(newStack);
-        if (newStack[newStack.length - 1] === 'contacts') {
-          setSelectedContact(null);
-        }
-        return true; // Обработано
-      }
-      return false; // Вернуться к системной обработке
-    };
+    Accelerometer.setUpdateInterval(500);
+  }, []);
 
-    const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      handleBackPress
+  const subscribe = () => {
+    setSubscription(
+      Accelerometer.addListener(accelerometerData => {
+        setData(accelerometerData);
+      })
     );
-
-    return () => backHandler.remove();
-  }, [screenStack]);
-
-  const navigateTo = (screen, contact = null) => {
-    setScreenStack([...screenStack, screen]);
-    if (contact) setSelectedContact(contact);
   };
 
-  const handleCall = () => navigateTo('call');
-
-  const handleSendMessage = () => {
-    if (!currentMessage.trim()) return;
-    const contactMessages = messages[selectedContact.id] || [];
-    setMessages({
-      ...messages,
-      [selectedContact.id]: [...contactMessages, { text: currentMessage, isUser: true }],
-    });
-    setCurrentMessage('');
+  const unsubscribe = () => {
+    subscription && subscription.remove();
+    setSubscription(null);
   };
 
-  const handleBack = () => {
-    if (screenStack.length > 1) {
-      const newStack = [...screenStack];
-      newStack.pop();
-      setScreenStack(newStack);
-      if (newStack[newStack.length - 1] === 'contacts') {
-        setSelectedContact(null);
-      }
-    }
+  const toggleAccelerometer = () => {
+    subscription ? unsubscribe() : subscribe();
   };
 
-  const handleShare = async () => {
-    try {
-      const result = await Share.share({
-        message: `Контакт: ${selectedContact.name}, Телефон: ${selectedContact.phone}`,
-      });
-      if (result.action === Share.sharedAction) {
-        alert('Контакт успешно отправлен!');
-      }
-    } catch (error) {
-      alert('Не удалось поделиться контактом.');
-    }
+  const { x, y, z } = data;
+
+  // Встроенный браузер
+  const openWebBrowser = async () => {
+    await WebBrowser.openBrowserAsync('https://docs.expo.dev');
   };
+
+  // Камера
+  useEffect(() => {
+    (async () => {
+      
+      const { status } = await Camera.requestCameraPermissionsAsync();
+      setHasPermission(status === 'granted');
+    })();
+  }, []);
+
+  if (hasPermission === null) {
+    return <View />;
+  }
+
+  if (hasPermission === false) {
+    return <Text>Нет доступа к камере</Text>;
+  }
 
   return (
     <View style={styles.container}>
-      {/* Список контактов */}
-      {currentScreen === 'contacts' && (
-        <View style={styles.contactsList}>
-          <Text style={styles.header}>Список контактов</Text>
-          <FlatList
-            data={contacts}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
+      {/* Мониторинг активности */}
+      <View style={styles.section}>
+        <Text style={styles.title}>Акселерометр</Text>
+        <Text style={styles.text}>x: {x ? x.toFixed(2) : '0.00'}</Text>
+        <Text style={styles.text}>y: {y ? y.toFixed(2) : '0.00'}</Text>
+        <Text style={styles.text}>z: {z ? z.toFixed(2) : '0.00'}</Text>
+        <Button onPress={toggleAccelerometer} title={subscription ? 'Стоп' : 'Старт'} />
+      </View>
+
+      {/* Открытие сайта */}
+      <View style={styles.section}>
+        <Button title="Открыть сайт" onPress={openWebBrowser} />
+      </View>
+
+      {/* Видео */}
+      <View style={styles.section}>
+        <Text style={styles.title}>Видео</Text>
+        <Video
+          source={{ uri: 'https://cs15.pikabu.ru/video/2024/12/16/1734367788295711398_5b2eb6b0_720x1280.av1.mp4' }}
+          rate={1.0}
+          volume={1.0}
+          isMuted={false}
+          resizeMode="cover"
+          shouldPlay
+          style={styles.video}
+        />
+      </View>
+
+      {/* Камера */}
+      <View style={styles.section}>
+        <Button title="Показать камеру" onPress={() => setCameraVisible(!cameraVisible)} />
+        {cameraVisible && (
+          <View style={styles.cameraContainer}>
+            <CameraView style={styles.camera}>
               <TouchableOpacity
-                style={styles.contactItem}
-                onPress={() => navigateTo('profile', item)}
-              >
-                <View style={styles.contactInfo}>
-                  <View style={styles.avatar}>
-                    <Text style={styles.avatarText}>{item.name.charAt(0)}</Text>
-                  </View>
-                  <View>
-                    <Text style={styles.contactName}>{item.name}</Text>
-                    <Text style={styles.contactPhone}>{item.phone}</Text>
-                  </View>
-                </View>
+              style={styles.cameraButton}
+              onPress={() => setCameraVisible(false)}>
+                <Text style={styles.cameraButtonText}>Закрыть</Text>
               </TouchableOpacity>
-            )}
-          />
-        </View>
-      )}
-
-      {/* Страница контакта */}
-      {currentScreen === 'profile' && selectedContact && (
-        <View style={styles.contactDetails}>
-          <View style={styles.contactHeader}>
-            <View style={styles.avatar}>
-              <Text style={styles.avatarText}>
-                {selectedContact.name.charAt(0)}
-              </Text>
-            </View>
-            <Text style={styles.contactName}>{selectedContact.name}</Text>
-            <Text style={styles.contactPhone}>Мобильный {selectedContact.phone}</Text>
+            </CameraView>
           </View>
-          <View style={styles.actionIcons}>
-            <TouchableOpacity style={styles.iconButton} onPress={handleCall}>
-              <Ionicons name="call" size={30} color="#4CAF50" />
-              <Text style={styles.iconText}>Позвонить</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.iconButton}
-              onPress={() => navigateTo('messages')}
-            >
-              <Ionicons name="chatbubble" size={30} color="#2196F3" />
-              <Text style={styles.iconText}>Сообщение</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.iconButton} onPress={handleShare}>
-              <Ionicons name="share-social" size={30} color="#FFC107" />
-              <Text style={styles.iconText}>Поделиться</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.additionalInfo}>
-            <TouchableOpacity style={styles.additionalButton}>
-              <Text style={styles.additionalText}>WhatsApp</Text>
-              <Ionicons name="logo-whatsapp" size={20} color="#4CAF50" />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.additionalButton}>
-              <Text style={styles.additionalText}>Telegram</Text>
-              <Ionicons name="paper-plane" size={20} color="#2196F3" />
-            </TouchableOpacity>
-          </View>
-        </View>
-      )}
-
-      {/* Экран звонка */}
-      {currentScreen === 'call' && selectedContact && (
-        <View style={styles.callScreen}>
-          <View style={styles.contactHeader}>
-            <View style={styles.avatar}>
-              <Text style={styles.avatarText}>
-                {selectedContact.name.charAt(0)}
-              </Text>
-            </View>
-            <Text style={styles.contactName}>{selectedContact.name}</Text>
-            <Text style={styles.contactPhone}>Мобильный {selectedContact.phone}</Text>
-          </View>
-          <Text style={styles.callingText}>Вызов...</Text>
-        </View>
-      )}
-
-      {/* Экран сообщений */}
-      {currentScreen === 'messages' && selectedContact && (
-        <View style={styles.messagesScreen}>
-          <View style={styles.messageHeader}>
-            <TouchableOpacity onPress={handleBack}>
-              <Ionicons name="arrow-back" size={24} color="#007bff" />
-            </TouchableOpacity>
-            <Text style={styles.messageHeaderText}>{selectedContact.name}</Text>
-          </View>
-          <FlatList
-            data={messages[selectedContact.id] || []}
-            keyExtractor={(_, index) => index.toString()}
-            renderItem={({ item }) => (
-              <View
-                style={[
-                  styles.messageBubble,
-                  item.isUser ? styles.userBubble : styles.contactBubble,
-                ]}
-              >
-                <Text style={styles.messageText}>{item.text}</Text>
-              </View>
-            )}
-            style={styles.messagesList}
-          />
-          <View style={styles.inputContainer}>
-            <TextInput
-              value={currentMessage}
-              onChangeText={setCurrentMessage}
-              placeholder="Введите сообщение"
-              style={styles.input}
-            />
-            <TouchableOpacity style={styles.sendButton} onPress={handleSendMessage}>
-              <Ionicons name="send" size={24} color="#fff" />
-            </TouchableOpacity>
-          </View>
-        </View>
-      )}
+)}
+      </View>
     </View>
   );
-};
+}
 
-// Стилизация (см. предыдущее сообщение)
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
-  },
-  // Список контактов
-  contactsList: {
-    flex: 1,
-    paddingTop: 40,
-    padding: 10,
-  },
-  header: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    marginBottom: 15,
-    textAlign: 'center',
-  },
-  contactItem: {
-    backgroundColor: '#ffffff',
-    padding: 15,
-    marginBottom: 10,
-    borderRadius: 8,
-    flexDirection: 'row',
+    backgroundColor: '#fff',
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    shadowOffset: { width: 0, height: 2 },
-    elevation: 2,
-  },
-  contactInfo: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  avatar: {
-    backgroundColor: '#007bff',
-    width: 50,
-    height: 50,
-    borderRadius: 25,
     justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 15,
   },
-  avatarText: {
-    color: '#fff',
+  section: {
+    marginVertical: 20,
+    alignItems: 'center',
+  },
+  title: {
     fontSize: 20,
     fontWeight: 'bold',
   },
-  contactName: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  contactPhone: {
-    fontSize: 14,
-    color: '#555',
-  },
-  // Детали контакта
-  contactDetails: {
-    paddingTop: 40,
-    flex: 1,
-    paddingHorizontal: 20,
-    alignItems: 'center',
-  },
-  contactHeader: {
-    alignItems: 'center',
-    marginTop: 20,
-    marginBottom: 30,
-  },
-  actionIcons: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    width: '100%',
-    marginVertical: 20,
-  },
-  iconButton: {
-    alignItems: 'center',
-  },
-  iconText: {
-    marginTop: 5,
-    fontSize: 12,
-    color: '#555',
-  },
-  additionalInfo: {
-    width: '100%',
-  },
-  additionalButton: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    padding: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ddd',
-  },
-  additionalText: {
+  text: {
     fontSize: 16,
+    marginVertical: 5,
   },
-  backButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 20,
+  video: {
+    width: 300,
+    height: 200,
   },
-  backButtonText: {
-    color: '#007bff',
+  camera: {
+    width: 300,
+    height: 400,
+    marginTop: 10,
+  },
+  cameraButton: {
+    position: 'absolute',
+    bottom: 20,
+    alignSelf: 'center',
+    backgroundColor: '#000',
+    padding: 10,
+    borderRadius: 5,
+  },
+  cameraButtonText: {
+    color: '#fff',
     fontSize: 16,
-    marginLeft: 5,
-  },
-   // Звонок
-   callScreen: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-   callingText: { fontSize: 22, color: '#888', marginTop: 20 },
-   // Сообщения
-  messagesScreen: { flex: 1 },
-  messagesList: { flex: 1 },
-  messageBubble: { padding: 10, borderRadius: 15, margin: 10 },
-  userBubble: { alignSelf: 'flex-end', backgroundColor: '#007bff' },
-  contactBubble: { alignSelf: 'flex-start', backgroundColor: '#e5e5e5' },
-  messageText: { color: '#fff' },
-  inputContainer: { flexDirection: 'row', padding: 10, backgroundColor: '#fff' },
-  input: { flex: 1, borderWidth: 1, borderColor: '#ddd', borderRadius: 8, padding: 10 },
-  sendButton: { marginLeft: 10, backgroundColor: '#007bff', padding: 10, borderRadius: 8 },
-  messageHeader: {
-    paddingTop: 50,
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 15,
-    backgroundColor: '#fff',
-    elevation: 2,
-  },
-  messageHeaderText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginLeft: 10,
   },
 });
 
