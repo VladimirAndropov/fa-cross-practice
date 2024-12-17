@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'examples/prepods_list.dart';
 import 'examples/sheduling_calendar.dart';
-import 'examples/group_list.dart';
-import 'examples/group_list_body.dart';
+
+
 
 void main() {
   runApp(MyApp());
@@ -27,31 +27,27 @@ class MyApp extends StatelessWidget {
                 path: '/PrepodsList',
                 name: 'PrepodsList',
                 builder: (BuildContext context, GoRouterState state) => const PrepodsList(),
-                routes: <RouteBase>[
-                  GoRoute(
-                    path: 'ShedulingCalendar/:id',
-                    name: 'ShedulingCalendar',
-                    builder: (BuildContext context, GoRouterState state) =>
-                        ShedulingCalendar(id: state.pathParameters['id']),
-                  ),
-                ],
               ),
             ],
           ),
           StatefulShellBranch(
             routes: <RouteBase>[
               GoRoute(
-                path: '/GroupList',
-                name: 'GroupList',
-                builder: (BuildContext context, GoRouterState state) => const GroupList(),               
-                routes: <RouteBase>[
-                  GoRoute(
-                    path: 'GroupListBody/:thisselectedCategory',
-                    name: 'GroupListBody',
+                // path: '/ShedulingCalendar/:id',
+                path: '/ShedulingCalendar',
+                    name: 'ShedulingCalendar',
                     builder: (BuildContext context, GoRouterState state) =>
-                        GroupListBody(thisselectedCategory: state.pathParameters['thisselectedCategory']),
-                  ),
-                ],
+                        // ShedulingCalendar(id: state.pathParameters['id']),     
+                        ShedulingCalendar(id: '8487e5d1-d82e-11e8-b636-005056bf5929' ),
+                                
+                // routes: <RouteBase>[
+                //   GoRoute(
+                //     path: 'GroupListBody/:thisselectedCategory',
+                //     name: 'GroupListBody',
+                //     builder: (BuildContext context, GoRouterState state) =>
+                //         GroupListBody(thisselectedCategory: state.pathParameters['thisselectedCategory']),
+                //   ),
+                // ],
               ),
             ],
           ),
@@ -89,8 +85,8 @@ class ScaffoldNavBar extends StatelessWidget {
       body: navigationShell,
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Расписание преподавателей'),
-          BottomNavigationBarItem(icon: Icon(Icons.work), label: 'Расписание группы'),
+          BottomNavigationBarItem(icon: Icon(Icons.table_rows_rounded), label: 'Список'),
+          BottomNavigationBarItem(icon: Icon(Icons.calendar_month_outlined), label: 'Календарь'),
         ],
         currentIndex: navigationShell.currentIndex,
         onTap: (int index) => _onTap(context, index),

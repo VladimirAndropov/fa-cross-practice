@@ -1,31 +1,51 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'package:go_router/go_router.dart';
-import 'package:flutter/services.dart' show rootBundle;
 
+import 'package:flutter_switch/flutter_switch.dart';
+import 'package:dio/dio.dart';
 
-class DataItem {
-  final String id;
-  final String label;
-  final String description;
+import 'package:intl/date_symbol_data_local.dart';
+import 'group_list_body.dart';
 
-  DataItem({required this.id, required this.label, required this.description});
+class Prepods {
+  String id;
+  String label;
+  String description;
 
-  factory DataItem.fromJson(Map<String, dynamic> json) {
-    return DataItem(
-        id: json['id'],
+  Prepods({required this.id, required this.label, required this.description});
+
+  factory Prepods.fromJson(Map<String, dynamic> json) {
+    return Prepods(
+        id: (json['id'] as String?) ?? '',
         label: (json['label'] as String?) ?? '',
         description: (json['description'] as String?) ?? '');
   }
+
+  static Future<Iterable<Prepods>> search(String query, bool status) async {
+    if (query.isEmpty) {
+      return <Prepods>[];
+    }
+    final response = await Dio().get(
+        'https://ruz.fa.ru/api/search?type=${status ? "person" : "group"}&term=$query');
+
+    try {
+      if (response.statusCode == 200) {
+        final List<dynamic> data = List<dynamic>.from(response.data);
+        return List<Prepods>.from(
+            data.map<Prepods>((dynamic e) => Prepods.fromJson(e)));
+      } else {
+        throw Exception('Error searching prepods: ${response.statusCode} ');
+      }
+    } catch (error) {
+      return <Prepods>[];
+    }
+  }
 }
 
-
-
-
 class PrepodsList extends StatelessWidget {
+  const PrepodsList({
+    super.key,
+  });
 
-  const PrepodsList({super.key, });
-  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -33,12 +53,12 @@ class PrepodsList extends StatelessWidget {
             // key: _scaffoldKey,
             appBar: AppBar(
               title: const Text(
-                'Преподаватели',
+                'Расписание',
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Roboto',
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
               ),
             ),
@@ -53,91 +73,140 @@ class PrepodsListBody extends StatefulWidget {
 }
 
 class _PrepodsListBodyState extends State<PrepodsListBody> {
+  Prepods? _selectedIItem;
+  String? _searchingWithQuery;
+  String? selectedresult;
+  bool _isLoading = true;
+  bool status = false;
+  double start = 0;
+  double end = 0;
+  late Iterable<Widget> _lastresults = <Widget>[];
+
   @override
-  Widget build(BuildContext context) {
-    return FutureBuilder<List<DataItem>>(
-        future: fetchData(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-          return ListView.builder(
-              itemCount: snapshot.data!.length,
-              itemBuilder: (context, index) {
-                return GestureDetector(
-      onTap: 
-          () => context.goNamed("ShedulingCalendar", pathParameters: {'id': snapshot.data![index].id}),
-      child: Card(
-                  margin: const EdgeInsets.symmetric(vertical: 10),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+  void initState() {
+    super.initState();
+        initializeDateFormatting('ru', null);
+  }
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Colors.grey.shade400, Colors.green.shade200],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+            ),
+          ),
+          actions: [
+            RangeSlider( 
+              divisions: 10,
+
+            values: RangeValues(start, end), 
+            labels: RangeLabels(start.round().toString(), end.round().toString()), 
+            onChanged: (value) { 
+              setState(() { 
+                start = value.start; 
+                end = value.end; 
+              }); 
+            }, 
+            min: -14, 
+            max: 14, 
+          ), 
+
+            FlutterSwitch(
+              activeText: "Лектор",
+              inactiveText: "Группа",
+              inactiveColor: Colors.green,
+              value: status,
+              valueFontSize: 16.0,
+              width: 140,
+              height: 30,
+              borderRadius: 30.0,
+              showOnOff: true,
+              onToggle: (val) {
+                setState(() {
+                  status = val;
+                });
+              },
+            ),
+          ],
+          title: SearchAnchor(
+            builder: (BuildContext context, SearchController controller) {
+              return SearchBar(
+                trailing: [
+                  IconButton(
+                    icon: const Icon(Icons.keyboard_voice),
+                    onPressed: () {
+                      print('Use voice command');
+                    },
                   ),
-                  elevation: 4,
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          snapshot.data![index].label,
-                          style: const TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
-                          overflow: TextOverflow.ellipsis,
-                          softWrap: true,
-                          maxLines: 3,
-                        ),
-                        const SizedBox(height: 8),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(
-                                height: 100,
-                                width: 100,
-                                child: Icon(Icons.image,
-                                    size:
-                                        50)), // Заглушка, если нет изображения
-                            const SizedBox(width: 16),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    snapshot.data![index].description,
-                                    style:
-                                        const TextStyle(color: Colors.black87),
-                                    maxLines: 4,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    snapshot.data![index].id,
-                                    style: const TextStyle(
-                                        color: Colors.black54, fontSize: 12),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                  IconButton(
+                    icon: const Icon(Icons.camera_alt),
+                    onPressed: () {
+                      print('Use image search');
+                    },
                   ),
-                )
+                ],
+                side: MaterialStateProperty.all(
+                    const BorderSide(color: Colors.black)),
+                overlayColor: MaterialStateProperty.all(Colors.grey.shade100),
+                controller: controller,
+                padding: const MaterialStatePropertyAll<EdgeInsets>(
+                    EdgeInsets.symmetric(horizontal: 16.0)),
+                onTap: () {
+                  controller.openView();
+                },
+                leading: const Icon(Icons.search),
+                hintText: status
+                    ? 'Наберите русскими буквами фамилию преподавателя'
+                    : 'Наберите русскими буквами название группы',
+              );
+            },
+            suggestionsBuilder:
+                (BuildContext context, SearchController controller) async {
+              _searchingWithQuery = controller.text;
+              final results =
+                  (await Prepods.search(_searchingWithQuery!, status)).toList();
+              if (_searchingWithQuery != controller.text) {
+                return <Widget>[]; //Prepods item = results[index];
+              }
+
+              _lastresults =
+                  List<ListTile>.generate(results.length, (int index) {
+                return ListTile(
+                  title: Text(results[index].label),
+                  onTap: () {
+                    setState(() {
+                      _isLoading = false;
+                      _selectedIItem = results[index];
+                    });
+                    controller.closeView(selectedresult);
+                    controller.text = results[index].label;
+                  },
+                  //  () => context.goNamed("ShedulingCalendar", pathParameters: {'id': results[index].id.toString()}),
                 );
               });
-        } else if (snapshot.hasError) {
-          return Text(snapshot.error.toString());
-        }
-        // By default show a loading spinner.
-        return const CircularProgressIndicator();
-        });
-  }
-  Future<List<DataItem>> fetchData() async {
-    String jsonString = await rootBundle.loadString('assets/prepods.json');
-    List<dynamic> parsed = json.decode(jsonString);
 
-    return List<DataItem>.from(
-        parsed.map<DataItem>((dynamic e) => DataItem.fromJson(e)));
-  }
-  
+              return _lastresults;
+            },
+          ),
+        ),
+        body: _isLoading
+            ? const Center(
+                child: Icon(
+                Icons.swipe_up_outlined,
+                color: Colors.black87,
+                size: 80,
+              ))
+            : GroupListBody(
+                thisselectedCategory: _selectedIItem!.id,
+                thisselectedstatus: status,
+                thisdatastart: start,
+                thisdataend: end
+                ),
+        backgroundColor: Colors.green.shade100,
+      );
 }
-
-  
