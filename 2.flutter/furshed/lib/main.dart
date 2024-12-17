@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'examples/auditorium.dart';
 import 'examples/prepods_list.dart';
-import 'examples/sheduling_calendar.dart';
+
 
 
 
@@ -34,11 +35,11 @@ class MyApp extends StatelessWidget {
             routes: <RouteBase>[
               GoRoute(
                 // path: '/ShedulingCalendar/:id',
-                path: '/ShedulingCalendar',
-                    name: 'ShedulingCalendar',
-                    builder: (BuildContext context, GoRouterState state) =>
+                path: '/SchedulePage',
+                name: 'SchedulePage',
+                builder: (BuildContext context, GoRouterState state) =>
                         // ShedulingCalendar(id: state.pathParameters['id']),     
-                        ShedulingCalendar(id: '8487e5d1-d82e-11e8-b636-005056bf5929' ),
+                        SchedulePage( ),
                                 
                 // routes: <RouteBase>[
                 //   GoRoute(
@@ -85,8 +86,8 @@ class ScaffoldNavBar extends StatelessWidget {
       body: navigationShell,
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.table_rows_rounded), label: 'Список'),
-          BottomNavigationBarItem(icon: Icon(Icons.calendar_month_outlined), label: 'Календарь'),
+          BottomNavigationBarItem(icon: Icon(Icons.table_rows_rounded), label: 'Прода'),
+          BottomNavigationBarItem(icon: Icon(Icons.calendar_month_outlined), label: 'Тест'),
         ],
         currentIndex: navigationShell.currentIndex,
         onTap: (int index) => _onTap(context, index),
