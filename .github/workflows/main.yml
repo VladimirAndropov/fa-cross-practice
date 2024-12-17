@@ -1,0 +1,92 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Fluter Furshed
+
+on:
+ push:
+    branches: [ "main" ]
+ pull_request:
+   branches:
+     - "build-**"
+   paths-ignore:
+     - "docs/**"
+     - "drz-swagger/**"
+     - ".vscode/**"
+     - ".idea/"
+     - "**/README.md"
+     - "README.md"
+     - ".github/**"
+
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:     
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-java@v1
+        with:
+          java-version: "17.x"
+          # cache: 'gradle'
+
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: "3.24.5"
+          channel: "stable"
+          # cache: true
+      - name: Display the path
+        run: |
+              echo ${HOME}
+              echo ${PATH}
+              echo "wow"
+      - name: Get dependencies
+        working-directory: ./2.flutter/furshed
+        run: flutter pub get
+
+      # - name: Analyze project source
+      #   run: flutter analyze
+
+      # - name: Run tests
+      #   run: flutter test
+      - name: Create keystore.jks
+        working-directory: ./2.flutter/furshed
+        run: |
+          echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 -d > /home/runner/upload-keystore.jks
+
+      - name: Run build apk
+        working-directory: ./2.flutter/furshed
+        run: flutter build apk --release
+        env:
+          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          STORE_FILE: "/home/runner/upload-keystore.jks"
+      - name: Display the path
+        run: |
+            echo ${HOME}
+            git tag 0.0.1
+            echo "wow"
+        shell: bash
+      #     -name: Debug Info
+      #      shell: bash
+      #      run: |
+      #         GITHUB_TAG = "0.0.1"
+      #         git tag ${GITHUB_TAG}
+      #         echo "Release Tag :   ${GITHUB_TAG}"
+      
+      - name: Upload Release Build to Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-artifacts
+          path: "/home/runner/work/fa-cross-practice/fa-cross-practice/2.flutter/furshed/build/app/outputs/flutter-apk/app-release.apk"     
+      - name: Create Github Release
+        uses: softprops/action-gh-release@v1
+        with:
+          body: "A new release"
+          tag_name: release
+          files: "/home/runner/work/fa-cross-practice/fa-cross-practice/2.flutter/furshed/build/app/outputs/flutter-apk/app-release.apk"
+        # env:
+        #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
