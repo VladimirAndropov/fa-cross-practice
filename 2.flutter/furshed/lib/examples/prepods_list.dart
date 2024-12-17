@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:dio/dio.dart';
+import 'package:furshed/examples/sheduling_calendar.dart';
 
 import 'package:intl/date_symbol_data_local.dart';
 import 'group_list_body.dart';
@@ -77,6 +78,7 @@ class _PrepodsListBodyState extends State<PrepodsListBody> {
   String? _searchingWithQuery;
   String? selectedresult;
   bool _isLoading = true;
+  bool calendar = true;
   bool status = false;
   double start = 0;
   double end = 0;
@@ -90,6 +92,14 @@ class _PrepodsListBodyState extends State<PrepodsListBody> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+    floatingActionButton: FloatingActionButton(
+        onPressed:   () {
+                    setState(() {
+                      calendar = !calendar;
+                    });},
+        tooltip: 'Календарь-Список',
+        child: const Icon(Icons.calendar_month_outlined),
+      ), 
         appBar: AppBar(
           flexibleSpace: Container(
             decoration: BoxDecoration(
@@ -132,6 +142,7 @@ class _PrepodsListBodyState extends State<PrepodsListBody> {
                 });
               },
             ),
+
           ],
           title: SearchAnchor(
             builder: (BuildContext context, SearchController controller) {
@@ -201,11 +212,17 @@ class _PrepodsListBodyState extends State<PrepodsListBody> {
                 color: Colors.black87,
                 size: 80,
               ))
-            : GroupListBody(
+            : calendar ?
+            GroupListBody(
                 thisselectedCategory: _selectedIItem!.id,
                 thisselectedstatus: status,
                 thisdatastart: start,
                 thisdataend: end
+                )
+                : 
+                // Text(_selectedIItem!.id,),
+                ShedulingCalendar(
+                  id: _selectedIItem!.id,
                 ),
         backgroundColor: Colors.green.shade100,
       );

@@ -1,9 +1,8 @@
-import 'dart:convert';
+
 
 import 'package:time_scheduler_table/time_scheduler_table.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:flutter/services.dart' show rootBundle;
+import 'package:dio/dio.dart';
 
 class ShedulingCalendar extends StatefulWidget {
 
@@ -98,27 +97,24 @@ class _ShedulingCalendarState extends State<ShedulingCalendar>
 
  Future getEventList() async {
     // eventList.clear();
-
-     var url =
-      Uri.parse('https://ruz.fa.ru/api/schedule/person/${widget.id}?start=2024.11.18&finish=2024.11.24');
-
+    String type = "person";
+    String formattedDateBefor ="2024.11.18";
+    String formattedDateAfter ="2024.11.24";
   // Await the http get response, then decode the json-formatted response.
-  var response = await http.get(url);
-  if (response.statusCode == 200) {
-    final List<dynamic> jsonResponse = json.decode(response.body);
-    eventList = List<Event>.from(
-          jsonResponse.map<Event>((dynamic e) => Event.fromJson(e))); 
+   final response = await Dio().get(
+        'https://ruz.fa.ru/api/schedule/$type/${widget.id}?start=$formattedDateBefor&finish=$formattedDateAfter'); //'https://ruz.fa.ru/api/schedule/group/${query}?start=$formattedDateNow&finish=$formattedDateNow'
+    if (response.statusCode == 200) {
+      final List data = List<dynamic>.from(response.data);
+      eventList =   List<Event>.from(
+              data.map<Event>((dynamic e) => Event.fromJson(e)));
+    } else {
+      throw Exception('Error searching prepods: ${response.statusCode} ');
 
-  } else {
-    String jsonString = await rootBundle.loadString('assets/andropov.json');
-    List<dynamic> jsonResponse = json.decode(jsonString);
-    eventList = List<Event>.from(
-          jsonResponse.map<Event>((dynamic e) => Event.fromJson(e))); 
-  }
-    setState(() {
+          }
+setState(() {
       eventList = eventList;   
       });
-  }
+        }
 
 }
 // это надо добавиь в класс Event 
