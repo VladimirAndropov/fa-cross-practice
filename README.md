@@ -1,4 +1,5 @@
-
+[![Fluter Furshed](https://github.com/VladimirAndropov/fa-cross-practice/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/VladimirAndropov/fa-cross-practice/actions/workflows/main.yml)
+# CROSS Кроссплатформенная разработка
 # Страничка семинаров   ПИ21-3 ПИ21-4 ПИ21-5 ПИ21-6
 
 ## Основные темы практики:
