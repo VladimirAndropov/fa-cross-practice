@@ -48,7 +48,7 @@ class _SchedulePageState extends State<SchedulePage> { // состояние с�
 
     try {
       final response = await dio.get( // делаем гет запрос
-          'https://ruz.fa.ru/api/search',
+          'http://localhost:3000/search',
           queryParameters: { // параметры запроса
             'term': term, // поисковый термин
             'type': searchType // тип поиска
@@ -223,10 +223,10 @@ class _ScheduleDetailPageState extends State<ScheduleDetailPage> { // состо
     String endpoint; // эндпоинт запроса
     if (widget.type == 'group') { // если группа
       endpoint =
-      'https://ruz.fa.ru/api/schedule/group/${widget.id}?start=$startDate&finish=$endDate'; // ссылка для группы
+      'http://localhost:3000/schedule/group/${widget.id}?start=$startDate&finish=$endDate'; // ссылка для группы
     } else if (widget.type == 'person') { // если препод
       endpoint =
-      'https://ruz.fa.ru/api/schedule/person/${widget.id}?start=$startDate&finish=$endDate'; // ссылка для препода
+      'http://localhost:3000/schedule/person/${widget.id}?start=$startDate&finish=$endDate'; // ссылка для препода
     } else { // другой тип
       setState(() { // обновляем состояние
         errorMessage = 'неизвестный тип расписания.'; // ошибка

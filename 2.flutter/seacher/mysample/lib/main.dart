@@ -104,7 +104,7 @@ class Prepods {
   if (query.isEmpty) {
     return <Prepods>[];
   }
-final response = await Dio().get('https://ruz.fa.ru/api/search?type=person&term=$query');
+final response = await Dio().get('http://localhost:3000/search?type=person&term=$query');
   try {
     if (response.statusCode == 200) {
         final List<dynamic> data = List< dynamic>.from(response.data);

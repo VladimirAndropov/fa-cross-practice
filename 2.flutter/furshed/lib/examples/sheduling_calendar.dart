@@ -98,24 +98,26 @@ class _ShedulingCalendarState extends State<ShedulingCalendar>
  Future getEventList() async {
     // eventList.clear();
 String type = "person";
-    String formattedDateBefor ="2024.11.18";
-    String formattedDateAfter ="2024.11.24";
+    String formattedDateBefor ="2026-04-25";
+    String formattedDateAfter ="2026-04-25";
   // Await the http get response, then decode the json-formatted response.
-  final response = await Dio().get(
-        'https://ruz.fa.ru/api/schedule/$type/${widget.id}?start=$formattedDateBefor&finish=$formattedDateAfter'); //'https://ruz.fa.ru/api/schedule/group/${query}?start=$formattedDateNow&finish=$formattedDateNow'
-  if (response.statusCode == 200) {
+     final uri = Uri.https('ruz.fa.ru', '/api/schedule/$type/${widget.id}', {'start': formattedDateBefor, 'finish': formattedDateAfter});
+    //  final response = await Dio().get(
+    //     'http://localhost:3000/schedule/$type/${widget.id}?start=$formattedDateBefor&finish=$formattedDateAfter'); //'https://ruz.fa.ru/api/schedule/group/${query}?start=$formattedDateNow&finish=$formattedDateNow'
+     
+      final response = await Dio().getUri(uri);
+        if (response.statusCode == 200) {
     final List data = List<dynamic>.from(response.data);
     eventList =   List<Event>.from(
-          data.map<Event>((dynamic e) => Event.fromJson(e))); 
+          data.map<Event>((dynamic e) => Event.fromJson(Map<String, dynamic>.from(e))));
   } else {
-    throw Exception('Error searching prepods: ${response.statusCode} ');
+    throw Exception('Error in calend: ${response.statusCode} ');
 
   }
     setState(() {
       eventList = eventList;   
       });
   }
-
 }
 // это надо добавиь в класс Event 
   //   factory Event.fromJson(Map<String, dynamic> json) { //import 'package:intl/intl.dart';
