@@ -10,7 +10,9 @@
 .history
 .svn/
 .~lock.brs-cross.xlsx#
-
+.metadata
+pubspec.lock
+pubspec.yaml
 # IntelliJ related
 *.iml
 *.ipr
@@ -38,8 +40,9 @@
 **/android/gradlew.bat
 **/android/local.properties
 **/android/**/GeneratedPluginRegistrant.java
-
+**/android/
 # iOS/XCode related
+**/ios/
 **/ios/**/*.mode1v3
 **/ios/**/*.mode2v3
 **/ios/**/*.moved-aside
@@ -65,6 +68,10 @@
 **/ios/ServiceDefinitions.json
 **/ios/Runner/GeneratedPluginRegistrant.*
 
+**/linux/
+**/macos/
+**/windows/
+**/web/
 # Exceptions to above rules.
 !**/ios/**/default.mode1v3
 !**/ios/**/default.mode2v3

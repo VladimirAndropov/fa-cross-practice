@@ -161,11 +161,11 @@ floatingActionButton: FloatingActionButton(
                     },
                   ),
                 ],
-                side: MaterialStateProperty.all(
+                side: WidgetStateProperty.all(
                     const BorderSide(color: Colors.black)),
-                overlayColor: MaterialStateProperty.all(Colors.grey.shade100),
+                overlayColor: WidgetStateProperty.all(Colors.grey.shade100),
                 controller: controller,
-                padding: const MaterialStatePropertyAll<EdgeInsets>(
+                padding: const WidgetStatePropertyAll<EdgeInsets>(
                     EdgeInsets.symmetric(horizontal: 16.0)),
                 onTap: () {
                   controller.openView();
