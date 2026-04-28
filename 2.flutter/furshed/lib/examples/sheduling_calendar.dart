@@ -98,8 +98,8 @@ class _ShedulingCalendarState extends State<ShedulingCalendar>
  Future getEventList() async {
     // eventList.clear();
 String type = "person";
-    String formattedDateBefor ="2026-04-25";
-    String formattedDateAfter ="2026-04-25";
+    String formattedDateBefor ="2026.04.20";
+    String formattedDateAfter ="2026.04.26";
   // Await the http get response, then decode the json-formatted response.
      final uri = Uri.https('ruz.fa.ru', '/api/schedule/$type/${widget.id}', {'start': formattedDateBefor, 'finish': formattedDateAfter});
     //  final response = await Dio().get(
