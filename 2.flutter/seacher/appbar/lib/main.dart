@@ -31,14 +31,20 @@ class Prepods {
     if (query.isEmpty) {
       return <Prepods>[];
     }
-    final response =
-        await Dio().get('https://ruz.fa.ru/api/search?type=person&term=$query');
+
+    final uri = Uri.https('ruz.fa.ru', '/api/search', {'type': 'person', 'term': query});
+
+    // final response =
+    //     await Dio().get('https://ruz.fa.ru/api/search?type=person&term=$query');
 
     try {
+      final response = await Dio().getUri(uri);
+
+
       if (response.statusCode == 200) {
         final List<dynamic> data = List<dynamic>.from(response.data);
         return List<Prepods>.from(
-            data.map<Prepods>((dynamic e) => Prepods.fromJson(e)));
+            data.map<Prepods>((dynamic e) => Prepods.fromJson(Map<String, dynamic>.from(e))));
       } else {
         throw Exception('Error searching prepods: ${response.statusCode} ');
       }

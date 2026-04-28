@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:dio/dio.dart';
 import 'package:furshed/examples/sheduling_calendar.dart';
-
+import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'group_list_body.dart';
 
@@ -22,21 +23,28 @@ class Prepods {
   }
 
   static Future<Iterable<Prepods>> search(String query, bool status) async {
-    if (query.isEmpty) {
+    if (query.trim().isEmpty) {
       return <Prepods>[];
     }
-    final response = await Dio().get(
-        'https://ruz.fa.ru/api/search?type=${status ? "person" : "group"}&term=$query');
+    final uri = Uri.https('ruz.fa.ru', '/api/search',  {'type': status ? 'person' : 'group', 'term': query},);
+
+    // final response = await Dio().get(
+        // 'http://localhost:3000/search?type=${status ? "person" : "group"}&term=$query');
 
     try {
-      if (response.statusCode == 200) {
-        final List<dynamic> data = List<dynamic>.from(response.data);
+       final response = await Dio().getUri(uri);
+
+      if (response.statusCode == 200 && response.data is List) {
+         List<dynamic>data = List<dynamic>.from(response.data);
         return List<Prepods>.from(
-            data.map<Prepods>((dynamic e) => Prepods.fromJson(e)));
+            data.map<Prepods>((dynamic e) => Prepods.fromJson(Map<String, dynamic>.from(e))));
       } else {
         throw Exception('Error searching prepods: ${response.statusCode} ');
       }
-    } catch (error) {
+    } catch (error, stackTrace) {
+      // Выводим ошибку и стек в консоль для отладки
+      print('Search request failed: $error');
+      print('StackTrace: $stackTrace');
       return <Prepods>[];
     }
   }
@@ -161,11 +169,11 @@ floatingActionButton: FloatingActionButton(
                     },
                   ),
                 ],
-                side: MaterialStateProperty.all(
+                side: WidgetStateProperty.all(
                     const BorderSide(color: Colors.black)),
-                overlayColor: MaterialStateProperty.all(Colors.grey.shade100),
+                overlayColor: WidgetStateProperty.all(Colors.grey.shade100),
                 controller: controller,
-                padding: const MaterialStatePropertyAll<EdgeInsets>(
+                padding: const WidgetStatePropertyAll<EdgeInsets>(
                     EdgeInsets.symmetric(horizontal: 16.0)),
                 onTap: () {
                   controller.openView();

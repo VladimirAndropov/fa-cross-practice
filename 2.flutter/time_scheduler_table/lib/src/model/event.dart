@@ -29,7 +29,9 @@ class Event {
     return Event(
         title: (json['discipline'] as String?) ?? '',
         time: (json['group'] as String?) ?? '',
-        columnIndex: DateFormat('y.MM.dd').parse(json['date']).weekday - 1,
+        // columnIndex: 1,
+        // rowIndex: 2,
+        columnIndex: DateFormat('yyyy-MM-dd').parse(json['date']).weekday - 1,
         rowIndex: (((DateFormat('H:mm').parse(json['beginLesson']).hour)*60+(DateFormat('H:mm').parse(json['beginLesson']).minute))/96).toInt()-5,
         // date: DateFormat('y.MM.dd').parse(json['date'] as String),
         // startTime:DateFormat('y.MM.dd H:mm').parse(json['date'] +' '+ json['beginLesson']),

@@ -41,8 +41,8 @@ class Post {
       group: json['group'] ?? '',
       beginLesson: json['beginLesson'] ?? '',
       endLesson: json['endLesson'] ?? '',
-      // date: DateFormat.yMMMMEEEEd().format(json['date']),
-      date: DateFormat.yMMMMEEEEd('ru').format(DateFormat('y.MM.dd').parse(json['date'])) ,
+      date: json['date'],
+      // date: DateFormat.yMMMMEEEEd('ru').format(DateFormat('y.MM.dd').parse(json['date'])) ,
       // onImageTap: (((DateFormat('H:mm').parse(json['beginLesson']).hour)/2.4+(DateFormat('H:mm').parse(json['beginLesson']).minute)/60)*1.6).toString,
     );
   }
@@ -58,29 +58,35 @@ class Post {
       group: (json['group']) as String,
       beginLesson: (json['beginLesson']) as String,
       endLesson: (json['endLesson']) as String,
-      date: DateFormat.yMMMMEEEEd('ru').format(DateFormat('y.MM.dd').parse(json['date'])) ,
+      date: (json['date']) as String,
+      // date: DateFormat.yMMMMEEEEd('ru').format(DateFormat('y.MM.dd').parse(json['date'])) ,
       // onImageTap: (((DateFormat('H:mm').parse(json['beginLesson']).hour)/2.4+(DateFormat('H:mm').parse(json['beginLesson']).minute)/60)*1.6).toString,
     );
   }
 
   static Future<List<Post>> fetchData(
-      String query, bool status, double datastart, double dataend) async {
+      String query, bool status
+      , double datastart, double dataend
+      ) async {
     String type;
     status ? type = "person" : type = "group";
     String formattedDateBefor = DateFormat('yyyy.MM.dd')
         .format(DateTime.now().add(Duration(days: datastart.ceil())));
     String formattedDateAfter = DateFormat('yyyy.MM.dd')
         .format(DateTime.now().add(Duration(days: dataend.ceil())));
-    final response = await Dio().get(
-        'https://ruz.fa.ru/api/schedule/$type/$query?start=$formattedDateBefor&finish=$formattedDateAfter'); //'https://ruz.fa.ru/api/schedule/group/${query}?start=$formattedDateNow&finish=$formattedDateNow'
+    
+     final uri = Uri.https('ruz.fa.ru', '/api/schedule/$type/$query', {'start': formattedDateBefor, 'finish': formattedDateAfter});
+ 
+    final response = await Dio().getUri(uri);
+       
     if (response.statusCode == 200) {
       final List data = List<dynamic>.from(response.data);
       return status
           ? List<Post>.from(
-              data.map<Post>((dynamic e) => Post.fromJsonPrepods(e)))
-          : List<Post>.from(data.map<Post>((dynamic e) => Post.fromJson(e)));
+              data.map<Post>((dynamic e) => Post.fromJsonPrepods(Map<String, dynamic>.from(e))))
+          : List<Post>.from(data.map<Post>((dynamic e) => Post.fromJson(Map<String, dynamic>.from(e))));
     } else {
-      throw Exception('Error searching prepods: ${response.statusCode} ');
+      throw Exception('Error in group list: ${response.statusCode} ');
     }
   }
 }
