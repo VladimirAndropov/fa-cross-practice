@@ -1,30 +1,136 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
+```dart
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:furshed/main.dart';
+import 'package:furshed/examples/prepods_list.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp());
+  group('API тесты', () {
+    test('API РУЗ возвращает список преподавателей или групп', () async {
+      // Выполняем реальный запрос к API приложения.
+      //
+      // false означает поиск группы.
+      // Для запроса используется непустая строка.
+      final results = await Prepods.search('ПИ', false);
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+      // API должен вернуть коллекцию результатов.
+      expect(results, isNotNull);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+      // Проверяем, что API действительно вернул данные.
+      expect(results, isNotEmpty);
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+      // Проверяем структуру первого полученного элемента.
+      final first = results.first;
+
+      expect(first.id, isNotEmpty);
+      expect(first.label, isNotEmpty);
+    });
+  });
+
+  group('Widget-тесты приложения', () {
+    testWidgets(
+      'Приложение запускается и отображает экран Расписание',
+      (WidgetTester tester) async {
+        await tester.pumpWidget(MyApp());
+
+        // Даём приложению время построить интерфейс.
+        await tester.pumpAndSettle();
+
+        // Проверяем наличие заголовка приложения.
+        expect(find.text('Расписание'), findsOneWidget);
+
+        // Проверяем наличие строки поиска.
+        expect(find.byType(SearchBar), findsOneWidget);
+
+        // Проверяем нижнюю навигацию.
+        expect(find.byType(BottomNavigationBar), findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      'Поиск получает данные из API и выводит список результатов',
+      (WidgetTester tester) async {
+        await tester.pumpWidget(MyApp());
+
+        await tester.pumpAndSettle();
+
+        // Находим поисковую строку приложения.
+        final searchBar = find.byType(SearchBar);
+
+        expect(searchBar, findsOneWidget);
+
+        // Открываем окно поиска.
+        await tester.tap(searchBar);
+
+        await tester.pumpAndSettle();
+
+        // Вводим запрос.
+        //
+        // Это тот же механизм, который используется пользователем
+        // для поиска группы.
+        await tester.enterText(
+          find.byType(SearchBar),
+          'ПИ',
+        );
+
+        // Даём SearchAnchor возможность выполнить
+        // асинхронный suggestionsBuilder.
+        await tester.pump();
+
+        // Ждём завершения HTTP-запроса и построения результатов.
+        await tester.pump(
+          const Duration(seconds: 3),
+        );
+
+        // API должен вернуть хотя бы один результат.
+        //
+        // Результаты в приложении выводятся как ListTile.
+        expect(find.byType(ListTile), findsWidgets);
+      },
+    );
+
+    testWidgets(
+      'Можно выбрать найденную группу',
+      (WidgetTester tester) async {
+        await tester.pumpWidget(MyApp());
+
+        await tester.pumpAndSettle();
+
+        // Открываем поиск.
+        await tester.tap(find.byType(SearchBar));
+
+        await tester.pumpAndSettle();
+
+        // Выполняем поиск.
+        await tester.enterText(
+          find.byType(SearchBar),
+          'ПИ',
+        );
+
+        await tester.pump();
+        await tester.pump(
+          const Duration(seconds: 3),
+        );
+
+        // Проверяем, что результаты действительно появились.
+        final results = find.byType(ListTile);
+
+        expect(results, findsWidgets);
+
+        // Выбираем первый результат.
+        await tester.tap(results.first);
+
+        // Даём приложению обработать выбор.
+        await tester.pumpAndSettle();
+
+        // После выбора SearchAnchor должен закрыться.
+        //
+        // Главное здесь — приложение не должно завершиться
+        // с исключением после выбора элемента.
+        expect(find.byType(BottomNavigationBar), findsOneWidget);
+      },
+    );
   });
 }
+```
