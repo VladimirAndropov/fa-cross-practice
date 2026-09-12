@@ -49,8 +49,8 @@ jobs:
       # - name: Analyze project source
       #   run: flutter analyze
 
-      # - name: Run tests
-      #   run: flutter test
+      - name: Run tests
+        run: flutter test
       - name: Create keystore.jks
         working-directory: ./2.flutter/furshed
         run: |
