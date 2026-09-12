@@ -50,6 +50,7 @@ jobs:
       #   run: flutter analyze
 
       - name: Run tests
+        working-directory: ./2.flutter/furshed
         run: flutter test
       - name: Create keystore.jks
         working-directory: ./2.flutter/furshed
