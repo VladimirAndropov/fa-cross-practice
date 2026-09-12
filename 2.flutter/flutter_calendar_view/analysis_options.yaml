@@ -1,0 +1,23 @@
+include: package:lints/core.yaml
+
+analyzer:
+  exclude:
+    - example/build/**
+    - exmaple/android/**
+    - example/ios/**
+    - example/web/**
+    - idea/**
+    - .dart_tool/**
+    - example/.dart_tool/**
+
+linter:
+  rules:
+    public_member_api_docs: false
+    avoid_print: true
+    avoid_empty_else: true
+    annotate_overrides: true
+    cancel_subscriptions: true
+    close_sinks: true
+    avoid_positional_boolean_parameters: false
+    use_super_parameters: true
+    prefer_relative_imports: true
